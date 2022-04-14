@@ -1,0 +1,19 @@
+div( data-role="panel" data-title-caption="SYNC STATE" )
+    table.table.subcompact.cell-border
+        tr
+            td.no-wrap Committed / Highest
+            td.text-right
+                span#sync_committed 0
+                span.ml-1.mr-1 /
+                span#sync_highest 0
+                div.text-small.text-muted#sync_timestamp_committed 0
+        tr
+            td Synced
+            td.text-right
+                span#sync_synced 0
+                div.text-small.text-muted#sync_timestamp_synced 0
+        tr
+            td Target
+            td.text-right
+                span#sync_target 0
+                div.text-small.text-muted#sync_timestamp_real 0

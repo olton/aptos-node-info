@@ -1,0 +1,21 @@
+.panel {
+  height: 100%;
+}
+.panel-content {
+  display: flex!important;
+  align-items: center;
+  height: 100%!important;
+}
+.port-wrapper {
+  display: flex!important;
+}
+.port-wrapper .port {
+  width: 100%;
+}
+.prepend {
+  font-size: 12px;
+  padding: 8px 4px!important;
+  display: flex!important;
+  align-items: center!important;
+}
+/*# sourceMappingURL=index.css.map */

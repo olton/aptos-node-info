@@ -1,0 +1,79 @@
+main.container-fluid
+    div#error-log
+        div#error-log-api
+        div#error-log-metric
+
+
+    div.row
+        div.cell-md-4
+            div.text-leader2 Ports test
+            div.row.text-center.text-small.reduce-3.ports-wrapper
+
+        div.cell-md-8
+            div.text-leader2 Node Status
+            div.row.text-center.text-small.reduce-3
+                div.cell-sm-6.cell-md-one-fifth
+                    div.border.bd-default.p-2
+                        span API:
+                        span.text-bold.ml-1#api_status ---
+                div.cell-sm-6.cell-md-one-fifth
+                    div.border.bd-default.p-2
+                        span METRIC:
+                        span.text-bold.ml-1#metric_status ---
+                div.cell-sm-6.cell-md-one-fifth
+                    div.border.bd-default.p-2
+                        span CHAIN:
+                        span.text-bold.ml-1#chain_status ---
+                div.cell-sm-6.cell-md-one-fifth
+                    div.border.bd-default.p-2
+                        span SYNC:
+                        span.text-bold.ml-1#sync_status ---
+                div.cell-sm-6.cell-md-one-fifth
+                    div.border.bd-default.p-2
+                        span PEERS:
+                        span.text-bold.ml-1#peer_status ---
+
+    div.row
+        div.cell-md-6.cell-lg-3
+            include ./blocks/api-ledger-info
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/sync-status
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/connections
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/requests
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/ledger-storage
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/transactions
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/rpc-bytes
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/rpc-messages
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/metrics
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/send-data
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/jellyfish
+
+        div.cell-md-6.cell-lg-3
+            include ./blocks/system
+
+        //div.cell-md-6.cell-lg-3
+        //    include ./blocks/ledger
+
+        //div.cell-md-6.cell-lg-3
+        //    include ./blocks/queues
+
+

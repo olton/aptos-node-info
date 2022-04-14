@@ -1,0 +1,10 @@
+.parcel-cache
+.cache
+.idea
+.output
+.build
+node_modules
+coverage
+*.log
+config.json
+!example.config.json

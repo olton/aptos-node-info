@@ -1,0 +1,39 @@
+{
+  "name": "aptos-node-informer",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olton/aptos-node-informer.git"
+  },
+  "keywords": [],
+  "author": "Serhii Pimenov <serhii@pimenov.com.ua>",
+  "bugs": {
+    "url": "https://github.com/olton/aptos-node-informer/issues"
+  },
+  "homepage": "https://github.com/olton/aptos-node-informer#readme",
+  "main": "src/server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "browserslist": [
+    "last 1 Chrome versions",
+    "last 1 Firefox versions",
+    "last 1 Opera versions",
+    "last 1 Edge versions"
+  ],
+  "dependencies": {
+    "@olton/datetime": "^2.0.8",
+    "assert": "^2.0.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "node-fetch": "^3.2.3",
+    "pug": "^3.0.2",
+    "serve-favicon": "^2.5.0",
+    "ws": "^8.5.0"
+  }
+}

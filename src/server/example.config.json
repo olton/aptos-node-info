@@ -1,0 +1,25 @@
+{
+    "server": {
+        "host": "localhost",
+        "port": 8000,
+        "ssl": {
+            "cert": "",
+            "key": "",
+            "port": 8043
+        }
+    },
+    "client": {
+        "theme": "auto",
+        "server": {
+            "host": "localhost",
+            "port": 8000,
+            "secure": false
+        }
+    },
+    "date-format": {
+        "log": "DD/MM/YYYY HH:mm:ss",
+        "full": "DD, MMM YYYY HH:mm",
+        "date": "DD, MMM YYYY",
+        "time": "HH:mm"
+    }
+}

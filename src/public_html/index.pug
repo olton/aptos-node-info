@@ -1,0 +1,38 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+
+        link(rel="stylesheet", href="vendor/metro4/css/metro-all.min.css")
+        link(rel="stylesheet", href="css/index.css")
+
+        title #{title}
+
+        script.
+            globalThis.protAddress = "http"
+            globalThis.nodeAddress = ""
+            globalThis.apiPort = 8080
+            globalThis.metricPort = 9101
+            globalThis.seedPort = 6180
+            globalThis.data = {
+                metric: false,
+                health: false,
+                api: false
+            }
+            globalThis.config = !{clientConfig}
+            globalThis.dateFormat = !{dateFormat}
+            globalThis.darkMode = false
+
+    body.m4-cloack
+        include ./header
+
+        div(style="height: 10px;")
+            div#activity(data-role="activity" data-type="metro" data-style="color" style="display: none;")
+
+        include ./main
+
+        script(src="vendor/metro4/js/metro.min.js")
+        script(type="module", src="js/index.js")
+        script(type="module", src="js/websocket.js")
+        script(type="module", src="js/updater.js")
