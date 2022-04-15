@@ -13,9 +13,16 @@
   width: 100%;
 }
 .prepend {
-  font-size: 12px;
-  padding: 8px 4px!important;
+  font-size: 11px;
+  padding: 0!important;
   display: flex!important;
   align-items: center!important;
+  transform: rotate(-90deg);
+  width: 34px;
+  height: 20px;
+  justify-content: center;
+  line-height: 1;
+  top: 7px;
+  left: -7px;
 }
 /*# sourceMappingURL=index.css.map */
