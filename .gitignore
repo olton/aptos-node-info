@@ -8,3 +8,5 @@ coverage
 *.log
 config.json
 !example.config.json
+*.crt
+*.key
