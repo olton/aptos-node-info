@@ -29,6 +29,7 @@ const route = () => {
     app.set('view engine', 'pug')
 
     const clientConfig = JSON.stringify(config.client)
+    const aptosConfig = JSON.stringify(config.aptos)
     const dateFormat = JSON.stringify(config['date-format'])
 
     app.get('/', async (req, res) => {
@@ -36,6 +37,7 @@ const route = () => {
             title: `Aptos Node Informer v${version}`,
             version,
             clientConfig,
+            aptosConfig,
             dateFormat,
         })
     })
@@ -52,8 +54,8 @@ export const runWebServer = () => {
         })
 
         httpsWebserver = https.createServer({
-            key: fs.readFileSync(key[0] === "." ? path.resolve(rootPath, key) : key),
-            cert: fs.readFileSync(cert[0] === "." ? path.resolve(rootPath, cert) : cert)
+            key: fs.readFileSync(key[0] === "." ? path.resolve(serverPath, key) : key),
+            cert: fs.readFileSync(cert[0] === "." ? path.resolve(serverPath, cert) : cert)
         }, app)
     } else {
         httpWebserver = http.createServer({}, app)
