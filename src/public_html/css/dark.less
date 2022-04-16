@@ -1,0 +1,68 @@
+html.dark-mode {
+    --body-background: #1e2228;
+    --color-text: #adbaa9;
+    --color-text-inverse: #24292e;
+    --color-border: #444c56;
+    --color-panel: #22272e;
+    --color-panel-second: #1b2125;
+    --color-panel-title: #ff8330;
+    --color-accent: #fff;
+    --color-neutral: #b6b6b6;
+    --color-success: #7dc37b;
+    --color-warning: #ff8330;
+    --color-alert: #ea0b0b;
+    --color-info: rgba(27, 161, 226, 0.56);
+    --color-info2: #4db5ff;
+    --color-yellow: #ffdb10;
+    --color-white: #fff;
+    --color-gray: #b6b6b6;
+    --color-active: #4db5ff;
+    --color-stop: #24292e;
+    --color-inactive: #4b4b4b;
+
+    body, .panel, .input {
+        background: var(--body-background);
+        color: var(--color-text);
+    }
+
+    input, select {
+        background: transparent!important;
+        color: var(--color-text)!important;
+    }
+
+    .bd-system, .bd-default, .panel, .panel-title, td, .input, .select {
+        border-color: var(--color-border)!important;
+    }
+
+    .panel-title, .value {
+        color: var(--color-accent) !important;
+    }
+
+    .prepend {
+        background: var(--color-border);
+        color: var(--color-accent);
+    }
+
+    .input button {
+        color: var(--color-white)!important;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active{
+        -webkit-box-shadow: 0 0 0 30px var(--body-background) inset !important;
+    }
+    input:-webkit-autofill{
+        -webkit-text-fill-color: var(--color-text) !important;
+    }
+
+    .light-mode-switch {
+        display: inline-block;
+    }
+
+    .dark-mode-switch {
+        display: none;
+    }
+
+}

@@ -41,6 +41,28 @@ globalThis.currentTime = () => {
 }
 
 ;$(() => {
+
+    globalThis.darkMode = $.dark
+
+    const storedDarkMode = Metro.storage.getItem("darkMode")
+    if (typeof storedDarkMode !== "undefined") {
+        globalThis.darkMode = storedDarkMode
+    }
+
+    if (darkMode) {
+        $("html").addClass("dark-mode")
+    }
+
+    $(".light-mode-switch, .dark-mode-switch").on("click", () => {
+        globalThis.darkMode = !globalThis.darkMode
+        Metro.storage.setItem("darkMode", darkMode)
+        if (darkMode) {
+            $("html").addClass("dark-mode")
+        } else {
+            $("html").removeClass("dark-mode")
+        }
+    })
+
     const ports = {
         api: apiPort,
         metrics: metricPort,
