@@ -104,7 +104,6 @@ globalThis.updateLedgerData = (data) => {
 
     chainStatus.parent().removeClassBy("bg-").addClass("fg-white")
     if (!error && ledger && +ledger.chain_id) {
-        console.log(aptos)
         if (+ledger.chain_id === +aptos.chain) {
             chainStatus.parent().addClass("bg-green")
             chainStatus.text("IN CHAIN")
