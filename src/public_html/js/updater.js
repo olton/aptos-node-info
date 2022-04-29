@@ -161,7 +161,7 @@ globalThis.updateMetricData = (d) => {
     const syncStatus = $("#sync_status")
 
     syncStatus.parent().removeClassBy("bg-").addClass("fg-white")
-    if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_target) <= 2 ) {
+    if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_applied_transaction_outputs) <= 2 ) {
         syncStatus.parent().addClass("bg-green")
         syncStatus.text("SYNCED")
     } else {

@@ -1,19 +1,16 @@
 div( data-role="panel" data-title-caption="SYNC STATE" )
     table.table.subcompact.cell-border
         tr
-            td.no-wrap Committed / Highest
+            td.no-wrap Executed transactions
             td.text-right.value
-                span#sync_committed 0
-                span.ml-1.mr-1 /
-                span#sync_highest 0
-                div.text-small.text-muted#sync_timestamp_committed 0
+                span#sync_executed_transactions 0
+
         tr
-            td Synced
+            td Applied transactions
+            td.text-right.value
+                span#sync_applied_transaction_outputs 0
+
+        tr
+            td Synced Blocks
             td.text-right.value
                 span#sync_synced 0
-                div.text-small.text-muted#sync_timestamp_synced 0
-        tr
-            td Target
-            td.text-right.value
-                span#sync_target 0
-                div.text-small.text-muted#sync_timestamp_real 0

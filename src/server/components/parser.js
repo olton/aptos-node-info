@@ -9,10 +9,12 @@ export const parseMetrics = data => {
 
         // +
         if (l.includes("aptos_state_sync_version")) {
-            if (l.includes("committed")) counters.sync_committed = val
-            if (l.includes("highest")) counters.sync_highest = val
+            // if (l.includes("committed")) counters.sync_committed = val
+            // if (l.includes("highest")) counters.sync_highest = val
+            // if (l.includes("target")) counters.sync_target = val
             if (l.includes("synced")) counters.sync_synced = val
-            if (l.includes("target")) counters.sync_target = val
+            if (l.includes("applied_transaction_outputs")) counters.sync_applied_transaction_outputs = val
+            if (l.includes("executed_transactions")) counters.sync_executed_transactions = val
         }
 
         // +
