@@ -114,8 +114,8 @@ globalThis.currentTime = () => {
     currentTime()
 
     {
-        const {chain = 0, network = 'devnet'} = aptos
+        const {chain = 0, network = 'None'} = aptos
         $("#chain-id").text(chain)
-        $("#network-type").text(network)
+        $("#network").text(network)
     }
 })
