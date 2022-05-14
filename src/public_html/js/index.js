@@ -105,4 +105,10 @@ globalThis.currentTime = () => {
     }
 
     currentTime()
+
+    {
+        const {chain = 0, network = 'devnet'} = aptos
+        $("#chain-id").text(chain)
+        $("#network-type").text(network)
+    }
 })
