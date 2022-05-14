@@ -72,8 +72,11 @@ globalThis.currentTime = () => {
     for(let p in ports) {
         portsWrapper.append(
             $("<div>").addClass("cell-fs-one-third").attr("title", `${(""+p).toUpperCase()} Port`).append(
-                $("<div>").addClass("border bd-default p-2").append(
-                    $("<span>").attr("id", `port-${p}`).text(`${p} port`)
+                $("<div>").addClass("border bd-default p-2").html(
+                    `
+                        <div class="small-box-title">${p} port</div>
+                        <div class="small-box-value" id="port-${p}">---</div>
+                    `
                 )
             )
         )

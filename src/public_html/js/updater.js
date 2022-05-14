@@ -224,6 +224,6 @@ globalThis.updatePortTest = data => {
         const el = $("#port-"+port)
         const pr = el.parent()
         pr.removeClassBy("bg-").addClass(ports[port] ? "bg-green" : "bg-red").addClass("fg-white")
-        el.html(`${(""+port).toUpperCase()}: <span class="text-bold">${targets[port]}</span>`)
+        el.html(`${targets[port]}`)
     }
 }
