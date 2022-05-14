@@ -159,15 +159,30 @@ globalThis.updateMetricData = (d) => {
     }
 
     const syncStatus = $("#sync_status")
+    const nodeType = $("#node-type")
 
     syncStatus.parent().removeClassBy("bg-").addClass("fg-white")
-    if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_applied_transaction_outputs) <= 2 ) {
-        syncStatus.parent().addClass("bg-green")
-        syncStatus.text("SYNCED")
+
+    if (metric.is_validator) {
+        nodeType.text(`Validator Node`)
+        if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_executed_transactions) <= 2 ) {
+            syncStatus.parent().addClass("bg-green")
+            syncStatus.text("SYNCED/SYNCING")
+        } else {
+            syncStatus.parent().addClass("bg-red")
+            syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
+        }
     } else {
-        syncStatus.parent().addClass("bg-red")
-        syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
+        nodeType.text(`Full Node`)
+        if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_applied_transaction_outputs) <= 2 ) {
+            syncStatus.parent().addClass("bg-green")
+            syncStatus.text("SYNCED/SYNCING")
+        } else {
+            syncStatus.parent().addClass("bg-red")
+            syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
+        }
     }
+
 
     const peerStatus = $("#peer_status")
 
@@ -176,7 +191,7 @@ globalThis.updateMetricData = (d) => {
         peerStatus.parent().addClass("bg-green")
         peerStatus.text("OK")
     } else {
-        peerStatus.parent().addClass("bg-red")
+        peerStatus.parent().addClass(metric.is_validator ? "bg-violet" : "bg-red")
         peerStatus.text("NO PEERS")
     }
 

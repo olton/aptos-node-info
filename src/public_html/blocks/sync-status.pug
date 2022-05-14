@@ -1,16 +1,35 @@
-div( data-role="panel" data-title-caption="SYNC STATE" )
-    table.table.subcompact.cell-border
-        tr
-            td.no-wrap Executed transactions
-            td.text-right.value
-                span#sync_executed_transactions 0
+div( data-role="panel" data-title-caption="SYNC STATE / CONSENSUS" )
+    div.d-flex.flex-column.w-100
+        div.text-bold.reduce-3 SYNC STATE
+        table.table.subcompact.cell-border
+            tr
+                td.no-wrap Executed transactions
+                td.text-right.value
+                    span#sync_executed_transactions 0
 
-        tr
-            td Applied transactions
-            td.text-right.value
-                span#sync_applied_transaction_outputs 0
+            tr
+                td Applied transactions
+                td.text-right.value
+                    span#sync_applied_transaction_outputs 0
 
-        tr
-            td Synced Blocks
-            td.text-right.value
-                span#sync_synced 0
+            tr
+                td Synced Blocks
+                td.text-right.value
+                    span#sync_synced 0
+
+        div.mt-2.text-bold.reduce-3 CONSENSUS
+        table.table.subcompact.cell-border
+            tr
+                td.no-wrap Current Round
+                td.text-right.value
+                    span#consensus_current_round 0
+
+            tr
+                td Last Commited Round
+                td.text-right.value
+                    span#consensus_last_committed_round 0
+
+            tr
+                td Consensus Epoch
+                td.text-right.value
+                    span#consensus_epoch 0

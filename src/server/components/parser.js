@@ -7,6 +7,39 @@ export const parseMetrics = data => {
 
         let val = l.split(" ")[1]
 
+        if (l.includes("aptos_consensus_current_round")) {
+            counters.is_validator = true
+            counters.consensus_current_round = val
+        }
+
+        if (l.includes("aptos_consensus_last_committed_round")) {
+            counters.consensus_last_committed_round = val
+        }
+
+        if (l.includes("aptos_consensus_current_epoch_validators")) {
+            counters.consensus_current_epoch_validators = val
+        }
+
+        if (l.includes("aptos_consensus_epoch")) {
+            counters.consensus_epoch = val
+        }
+
+        if (l.includes("aptos_consensus_last_committed_version")) {
+            counters.consensus_last_committed_version = val
+        }
+
+        if (l.includes("aptos_consensus_num_blocks_in_tree")) {
+            counters.consensus_num_blocks_in_tree = val
+        }
+
+        if (l.includes("aptos_consensus_proposals_count")) {
+            counters.consensus_proposals_count = val
+        }
+
+        if (l.includes("aptos_consensus_qc_rounds_count")) {
+            counters.consensus_qc_rounds_count = val
+        }
+
         // +
         if (l.includes("aptos_state_sync_version")) {
             // if (l.includes("committed")) counters.sync_committed = val
