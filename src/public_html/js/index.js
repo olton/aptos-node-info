@@ -46,6 +46,7 @@ globalThis.currentTime = () => {
 ;$(() => {
 
     globalThis.darkMode = $.dark
+    globalThis.ledgerVersion = -1
 
     const storedDarkMode = Metro.storage.getItem("darkMode")
     if (typeof storedDarkMode !== "undefined") {
