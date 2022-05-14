@@ -50,6 +50,14 @@
   font-weight: 600;
   margin-top: 0;
 }
+#chain-ok {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  bottom: 0;
+  font-size: 32px;
+  display: none;
+}
 html.dark-mode {
   --body-background: #1e2228;
   --color-text: #adbaa9;

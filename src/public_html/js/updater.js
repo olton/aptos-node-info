@@ -79,11 +79,13 @@ globalThis.updateLedgerData = (data) => {
     const errorLog = $("#error-log-api").clear()
 
     if (!error) {
+        globalThis.ledgerVersion = ledger.ledger_version
         $("#chain_id").text(ledger.chain_id)
         $("#epoch").text(ledger.epoch)
         $("#ledger_version").text(ledger.ledger_version)
         $("#ledger_timestamp").text(datetime(ledger.ledger_timestamp / 1000).format(globalThis.dateFormat.full))
     } else {
+        globalThis.ledgerVersion = -1
         errorLog.clear().append(
             $("<div>").addClass("remark alert").text(`API: ${ledger.error}`)
         )
@@ -107,9 +109,11 @@ globalThis.updateLedgerData = (data) => {
         if (+ledger.chain_id === +aptos.chain) {
             chainStatus.parent().addClass("bg-green")
             chainStatus.text("IN CHAIN")
+            $("#chain-ok").show();
         } else {
             chainStatus.parent().addClass("bg-red")
             chainStatus.text("UPDATE NODE")
+            $("#chain-ok").hide();
         }
     } else {
         chainStatus.parent().addClass("bg-red")
@@ -166,8 +170,14 @@ globalThis.updateMetricData = (d) => {
     if (metric.is_validator) {
         nodeType.text(`Validator Node`)
         if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_executed_transactions) <= 2 ) {
-            syncStatus.parent().addClass("bg-green")
-            syncStatus.text("SYNCED/SYNCING")
+
+            if (+ledgerVersion > 0 && +metric.sync_synced > (+ledgerVersion + 10)) {
+                syncStatus.parent().addClass("bg-cyan")
+                syncStatus.text("CATCHUP")
+            } else {
+                syncStatus.parent().addClass("bg-green")
+                syncStatus.text("SYNCED")
+            }
         } else {
             syncStatus.parent().addClass("bg-red")
             syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
