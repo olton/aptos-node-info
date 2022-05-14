@@ -18,11 +18,11 @@ globalThis.enterAddress = (form) => {
     $("#node-type-icon").html($("<span>").addClass("mif-question"));
     $("#chain-ok").html($("<span>").addClass("mif-question"));
 
-    const address = form.elements["node_address"].value
-    const api = form.elements["api_port"].value || 8080
-    const metric = form.elements["metric_port"].value || 9101
-    const seed = form.elements["seed_port"].value || 6180
-    const prot = form.elements["prot_address"].value || "http"
+    const address = form.elements["node_address"].value.trim()
+    const api = +(form.elements["api_port"].value.trim()) || 8080
+    const metric = +(form.elements["metric_port"].value.trim()) || 9101
+    const seed = +(form.elements["seed_port"].value.trim()) || 6180
+    const prot = form.elements["prot_address"].value.trim() || "http"
 
     if (!address) {
         nodeAddress = ""
