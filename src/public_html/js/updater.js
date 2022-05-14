@@ -77,6 +77,7 @@ globalThis.updateLedgerData = (data) => {
     const apiStatus = $("#api_status")
     const chainStatus = $("#chain_status")
     const errorLog = $("#error-log-api").clear()
+    const chainOk = $("#chain-ok")
 
     if (!error) {
         globalThis.ledgerVersion = ledger.ledger_version
@@ -104,16 +105,19 @@ globalThis.updateLedgerData = (data) => {
         apiStatus.text("PORT CLOSED")
     }
 
+
     chainStatus.parent().removeClassBy("bg-").addClass("fg-white")
+    chainOk.removeClassBy("fg-")
+
     if (!error && ledger && +ledger.chain_id) {
         if (+ledger.chain_id === +aptos.chain) {
             chainStatus.parent().addClass("bg-green")
             chainStatus.text("IN CHAIN")
-            $("#chain-ok").show();
+            chainOk.html($("<span>").addClass("mif-checkmark"));
         } else {
             chainStatus.parent().addClass("bg-red")
             chainStatus.text("UPDATE NODE")
-            $("#chain-ok").hide();
+            chainOk.html($("<span>").addClass("mif-cross"));
         }
     } else {
         chainStatus.parent().addClass("bg-red")
@@ -164,11 +168,14 @@ globalThis.updateMetricData = (d) => {
 
     const syncStatus = $("#sync_status")
     const nodeType = $("#node-type")
+    const nodeTypeIcon = $("#node-type-icon")
 
     syncStatus.parent().removeClassBy("bg-").addClass("fg-white")
 
     if (metric.is_validator) {
         nodeType.text(`Validator Node`)
+        nodeTypeIcon.html($("<span>").addClass("mif-user-secret"));
+
         if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_executed_transactions) <= 2 ) {
 
             if (+ledgerVersion > 0 && +metric.sync_synced > (+ledgerVersion + 10)) {
@@ -184,6 +191,8 @@ globalThis.updateMetricData = (d) => {
         }
     } else {
         nodeType.text(`Full Node`)
+        nodeTypeIcon.html($("<span>").addClass("mif-organization"));
+
         if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_applied_transaction_outputs) <= 2 ) {
             syncStatus.parent().addClass("bg-green")
             syncStatus.text("SYNCED/SYNCING")

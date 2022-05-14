@@ -50,13 +50,14 @@
   font-weight: 600;
   margin-top: 0;
 }
-#chain-ok {
+#chain-ok,
+#network-icon,
+#node-type-icon {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 20px;
+  top: 12px;
   bottom: 0;
   font-size: 32px;
-  display: none;
 }
 html.dark-mode {
   --body-background: #1e2228;

@@ -15,6 +15,9 @@ globalThis.enterAddress = (form) => {
         $("#port-"+p).parent().removeClassBy("bg-")
     }
 
+    $("#node-type-icon").html($("<span>").addClass("mif-question"));
+    $("#chain-ok").html($("<span>").addClass("mif-question"));
+
     const address = form.elements["node_address"].value
     const api = form.elements["api_port"].value || 8080
     const metric = form.elements["metric_port"].value || 9101
