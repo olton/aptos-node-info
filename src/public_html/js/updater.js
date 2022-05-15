@@ -113,11 +113,11 @@ globalThis.updateLedgerData = (data) => {
         if (+ledger.chain_id === +aptos.chain) {
             chainStatus.parent().addClass("bg-green")
             chainStatus.text("IN CHAIN")
-            chainOk.html($("<span>").addClass("mif-checkmark"));
+            chainOk.html($("<span>").addClass("mif-checkmark")).addClass("fg-green");
         } else {
             chainStatus.parent().addClass("bg-red")
             chainStatus.text("UPDATE NODE")
-            chainOk.html($("<span>").addClass("mif-cross"));
+            chainOk.html($("<span>").addClass("mif-cross")).addClass("fg-green");
         }
     } else {
         chainStatus.parent().addClass("bg-red")
@@ -168,9 +168,15 @@ globalThis.updateMetricData = (d) => {
 
     const syncStatus = $("#sync_status")
     const nodeType = $("#node-type")
-    const nodeTypeIcon = $("#node-type-icon")
+    const nodeTypeIcon = $("#node-type-icon").removeClassBy("fg-")
+    const networkIcon = $("#network-icon").removeClassBy("fg-")
 
     syncStatus.parent().removeClassBy("bg-").addClass("fg-white")
+
+    if (status) {
+        nodeTypeIcon.addClass("fg-green")
+        networkIcon.addClass("fg-green")
+    }
 
     if (metric.is_validator) {
         nodeType.text(`Validator Node`)

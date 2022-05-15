@@ -15,8 +15,9 @@ globalThis.enterAddress = (form) => {
         $("#port-"+p).parent().removeClassBy("bg-")
     }
 
-    $("#node-type-icon").html($("<span>").addClass("mif-question"));
-    $("#chain-ok").html($("<span>").addClass("mif-question"));
+    $("#node-type-icon").removeClassBy("fg-").html($("<span>").addClass("mif-question"));
+    $("#chain-ok").removeClassBy("fg-").html($("<span>").addClass("mif-question"));
+    $("#network-icon").removeClassBy("fg-");
 
     const address = form.elements["node_address"].value.trim()
     const api = +(form.elements["api_port"].value.trim()) || 8080

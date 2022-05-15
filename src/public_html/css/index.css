@@ -58,6 +58,7 @@
   top: 12px;
   bottom: 0;
   font-size: 32px;
+  color: #e8e8e8;
 }
 html.dark-mode {
   --body-background: #1e2228;
