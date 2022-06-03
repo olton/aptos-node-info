@@ -42,12 +42,10 @@ export const parseMetrics = data => {
 
         // +
         if (l.includes("aptos_state_sync_version")) {
-            // if (l.includes("committed")) counters.sync_committed = val
-            // if (l.includes("highest")) counters.sync_highest = val
-            // if (l.includes("target")) counters.sync_target = val
-            if (l.includes("synced")) counters.sync_synced = val
+            if (l.includes('type="synced"')) counters.sync_synced = val
             if (l.includes("applied_transaction_outputs")) counters.sync_applied_transaction_outputs = val
             if (l.includes("executed_transactions")) counters.sync_executed_transactions = val
+            if (l.includes("synced_epoch")) counters.sync_synced_epoch = val
         }
 
         // +
@@ -55,6 +53,13 @@ export const parseMetrics = data => {
             if (l.includes("committed")) counters.sync_timestamp_committed = val
             if (l.includes("real")) counters.sync_timestamp_real = val
             if (l.includes("synced")) counters.sync_timestamp_synced = val
+        }
+
+        if (l.includes("aptos_data_client_highest_advertised_data")) {
+            if (l.includes("account_states")) counters.advretised_account_states = val
+            if (l.includes("ledger_infos")) counters.advretised_ledger_infos = val
+            if (l.includes("transaction_outputs")) counters.advretised_transaction_outputs = val
+            if (l.includes("transactions")) counters.advretised_transactions = val
         }
 
         // +
