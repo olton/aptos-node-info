@@ -199,13 +199,16 @@ globalThis.updateMetricData = (d) => {
         nodeType.text(`Full Node`)
         nodeTypeIcon.html($("<span>").addClass("mif-organization"));
 
-        if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_applied_transaction_outputs) <= 2 ) {
-            syncStatus.parent().addClass("bg-green")
-            syncStatus.text("SYNCED/SYNCING")
-        } else {
-            syncStatus.parent().addClass("bg-red")
-            syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
-        }
+        syncStatus.parent().addClass("bg-violet")
+        syncStatus.text("SYNCED/SYNCING")
+
+        // if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_applied_transaction_outputs) <= 2 ) {
+        //     syncStatus.parent().addClass("bg-green")
+        //     syncStatus.text("SYNCED/SYNCING")
+        // } else {
+        //     syncStatus.parent().addClass("bg-red")
+        //     syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
+        // }
     }
 
 
