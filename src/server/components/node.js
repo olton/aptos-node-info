@@ -43,7 +43,11 @@ export const getHostApiData = async ({path = LEDGER_ENDPOINT, json = true, host 
             signal: controller.signal
         });
         if (response.ok) {
-            result = json ? await response.json() : await response.text()
+            result = json ? {
+                ...(await response.json()),
+                aptos_chain_id: +globalThis.aptosState.chain_id,
+                aptos_version: +globalThis.aptosState.ledger_version,
+            } : await response.text()
         } else {
             result = json ? {error: "no response"} : ":error:no response"
         }

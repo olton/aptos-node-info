@@ -1,26 +1,39 @@
 div( data-role="panel" data-title-caption="API LEDGER INFO" )
-    table.table.subcompact.cell-border
-        tr
-            td.no-wrap Node Health
-            td.text-right.value
-                span#node_health Unknown
-        tr
-            td.no-wrap Chain ID
-            td.text-right.value
-                span#chain_id 0
-        tr
-            td Epoch
-            td.text-right.value
-                span#epoch 0
-        tr
-            td Version
-            td.text-right.value
-                span#ledger_version 0
-        tr
-            td Timestamp
-            td.text-right.value
-                span#ledger_timestamp DD/MM/YYYY HH:mm:ss
-        tr
-            td Node Host
-            td.text-right.value
-                span#node_host Unknown
+    div.w-100
+        div.mt-2.text-bold.reduce-3 APTOS STATE
+        table.table.subcompact.cell-border
+            tr
+                td.no-wrap Chain ID
+                td.text-right.value
+                    span#aptos_chain_id 0
+            tr
+                td Version
+                td.text-right.value
+                    span#aptos_version 0
+
+        div.mt-2.text-bold.reduce-3 NODE STATE
+        table.table.subcompact.cell-border
+            tr
+                td.no-wrap Node Health
+                td.text-right.value
+                    span#node_health Unknown
+            tr
+                td.no-wrap Chain ID
+                td.text-right.value
+                    span#chain_id 0
+            tr
+                td Epoch
+                td.text-right.value
+                    span#epoch 0
+            tr
+                td Version
+                td.text-right.value
+                    span#ledger_version 0
+            tr
+                td Timestamp
+                td.text-right.value
+                    span#ledger_timestamp DD/MM/YYYY HH:mm:ss
+            tr
+                td Node Host
+                td.text-right.value
+                    span#node_host Unknown

@@ -78,6 +78,17 @@ globalThis.updateLedgerData = (data) => {
     const chainStatus = $("#chain_status")
     const errorLog = $("#error-log-api").clear()
     const chainOk = $("#chain-ok")
+    const syncStatus = $("#sync_status")
+    const aptosChainId = $("#aptos_chain_id")
+    const aptosVersion = $("#aptos_version")
+
+    const in_chain = !error && +(data.ledger.chain_id) === +(data.ledger.aptos_chain_id)
+    const synced = !error && Math.abs(+(data.ledger.ledger_version) - +(data.ledger.aptos_version)) <= 10
+
+    if (!error) {
+        aptosChainId.text(data.ledger.aptos_chain_id)
+        aptosVersion.text(data.ledger.aptos_version)
+    }
 
     if (!error) {
         globalThis.ledgerVersion = ledger.ledger_version
@@ -109,8 +120,8 @@ globalThis.updateLedgerData = (data) => {
     chainStatus.parent().removeClassBy("bg-").addClass("fg-white")
     chainOk.removeClassBy("fg-")
 
-    if (!error && ledger && +ledger.chain_id) {
-        if (+ledger.chain_id === +aptos.chain) {
+    if (!error) {
+        if (in_chain) {
             chainStatus.parent().addClass("bg-green")
             chainStatus.text("IN CHAIN")
             chainOk.html($("<span>").addClass("mif-checkmark")).addClass("fg-green");
@@ -122,6 +133,20 @@ globalThis.updateLedgerData = (data) => {
     } else {
         chainStatus.parent().addClass("bg-red")
         chainStatus.text("NO CHAIN DATA")
+    }
+
+    syncStatus.parent().removeClassBy("bg-")
+    if (!error) {
+        if (synced) {
+            syncStatus.parent().addClass("bg-green fg-white")
+            syncStatus.text("SYNCED")
+        } else {
+            syncStatus.parent().addClass("bg-cyan fg-white")
+            syncStatus.text("CATCHUP")
+        }
+    } else {
+        syncStatus.parent().addClass("bg-red")
+        syncStatus.text("NOT SYNCED")
     }
 
     if (target && target.host) {
@@ -166,12 +191,12 @@ globalThis.updateMetricData = (d) => {
         }
     }
 
-    const syncStatus = $("#sync_status")
+    // const syncStatus = $("#sync_status")
     const nodeType = $("#node-type")
     const nodeTypeIcon = $("#node-type-icon").removeClassBy("fg-")
     const networkIcon = $("#network-icon").removeClassBy("fg-")
 
-    syncStatus.parent().removeClassBy("bg-").addClass("fg-white")
+    // syncStatus.parent().removeClassBy("bg-").addClass("fg-white")
 
     if (status) {
         nodeTypeIcon.addClass("fg-green")
@@ -182,26 +207,33 @@ globalThis.updateMetricData = (d) => {
         nodeType.text(`Validator Node`)
         nodeTypeIcon.html($("<span>").addClass("mif-user-secret"));
 
-        if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_executed_transactions) <= 2 ) {
-
-            if (+ledgerVersion > 0 && +metric.sync_synced > (+ledgerVersion + 10)) {
-                syncStatus.parent().addClass("bg-cyan")
-                syncStatus.text("CATCHUP")
-            } else {
-                syncStatus.parent().addClass("bg-green")
-                syncStatus.text("SYNCED")
-            }
-        } else {
-            syncStatus.parent().addClass("bg-red")
-            syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
-        }
+        // if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_executed_transactions) <= 2 ) {
+        //
+        //     if (+ledgerVersion > 0 && +metric.sync_synced > (+ledgerVersion + 10)) {
+        //         syncStatus.parent().addClass("bg-cyan")
+        //         syncStatus.text("CATCHUP")
+        //     } else {
+        //         syncStatus.parent().addClass("bg-green")
+        //         syncStatus.text("SYNCED")
+        //     }
+        // } else {
+        //     syncStatus.parent().addClass("bg-red")
+        //     syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
+        // }
     } else {
         nodeType.text(`Full Node`)
         nodeTypeIcon.html($("<span>").addClass("mif-organization"));
 
-        syncStatus.parent().addClass("bg-violet")
-        syncStatus.text("SYNCED/SYNCING")
-
+        // let nodeStateColor, nodeStateText
+        // switch (metric.node_sync_state) {
+        //     case 0 : nodeStateColor = 'bg-cyan'; nodeStateText = 'CATCHUP'; break;
+        //     case 1 : nodeStateColor = 'bg-green'; nodeStateText = 'SYNCED'; break;
+        //     default: nodeStateColor = 'bg-violet'; nodeStateText = 'UNKNOWN'
+        // }
+        //
+        // syncStatus.parent().addClass(nodeStateColor)
+        // syncStatus.text(nodeStateText)
+        //
         // if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_applied_transaction_outputs) <= 2 ) {
         //     syncStatus.parent().addClass("bg-green")
         //     syncStatus.text("SYNCED/SYNCING")

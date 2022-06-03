@@ -40,12 +40,22 @@ export const parseMetrics = data => {
             counters.consensus_qc_rounds_count = val
         }
 
+        // counters.node_sync_state = -1
+
         // +
         if (l.includes("aptos_state_sync_version")) {
             if (l.includes('type="synced"')) counters.sync_synced = val
             if (l.includes("applied_transaction_outputs")) counters.sync_applied_transaction_outputs = val
             if (l.includes("executed_transactions")) counters.sync_executed_transactions = val
             if (l.includes("synced_epoch")) counters.sync_synced_epoch = val
+
+            if (!isNaN(counters.sync_synced)) {
+                if (Math.abs(+globalThis.aptosState.ledger_version - +counters.sync_synced) <= 10) {
+                    counters.node_sync_state = 1
+                } else {
+                    counters.node_sync_state = 0
+                }
+            }
         }
 
         // +
