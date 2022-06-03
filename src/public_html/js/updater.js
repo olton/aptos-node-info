@@ -117,7 +117,7 @@ globalThis.updateLedgerData = (data) => {
         } else {
             chainStatus.parent().addClass("bg-red")
             chainStatus.text("UPDATE NODE")
-            chainOk.html($("<span>").addClass("mif-cross")).addClass("fg-green");
+            chainOk.html($("<span>").addClass("mif-cross")).addClass("fg-red");
         }
     } else {
         chainStatus.parent().addClass("bg-red")
