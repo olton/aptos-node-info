@@ -17,19 +17,41 @@ div( data-role="panel" data-title-caption="SYNC STATE / CONSENSUS" )
                 td.text-right.value
                     span#sync_synced 0
 
-        div.mt-2.text-bold.reduce-3 CONSENSUS
+        div.mt-2.text-bold.reduce-3 Advertised
         table.table.subcompact.cell-border
             tr
-                td.no-wrap Current Round
+                td.no-wrap Account State
                 td.text-right.value
-                    span#consensus_current_round 0
+                    span#advretised_account_states 0
 
             tr
-                td Last Commited Round
+                td Ledger Info
                 td.text-right.value
-                    span#consensus_last_committed_round 0
+                    span#advretised_ledger_infos 0
 
             tr
-                td Consensus Epoch
+                td Transaction Outputs
                 td.text-right.value
-                    span#consensus_epoch 0
+                    span#advretised_transaction_outputs 0
+
+            tr
+                td Transactions
+                td.text-right.value
+                    span#advretised_transactions 0
+
+        //div.mt-2.text-bold.reduce-3 CONSENSUS
+        //table.table.subcompact.cell-border
+        //    tr
+        //        td.no-wrap Current Round
+        //        td.text-right.value
+        //            span#consensus_current_round 0
+        //
+        //    tr
+        //        td Last Commited Round
+        //        td.text-right.value
+        //            span#consensus_last_committed_round 0
+        //
+        //    tr
+        //        td Consensus Epoch
+        //        td.text-right.value
+        //            span#consensus_epoch 0
