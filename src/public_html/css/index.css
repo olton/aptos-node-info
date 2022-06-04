@@ -52,7 +52,8 @@
 }
 #chain-ok,
 #network-icon,
-#node-type-icon {
+#node-type-icon,
+#version-icon {
   position: absolute;
   right: 20px;
   top: 12px;

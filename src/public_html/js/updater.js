@@ -79,16 +79,9 @@ globalThis.updateLedgerData = (data) => {
     const errorLog = $("#error-log-api").clear()
     const chainOk = $("#chain-ok")
     const syncStatus = $("#sync_status")
-    const aptosChainId = $("#aptos_chain_id")
-    const aptosVersion = $("#aptos_version")
 
     const in_chain = !error && +(data.ledger.chain_id) === +(data.ledger.aptos_chain_id)
     const synced = !error && Math.abs(+(data.ledger.ledger_version) - +(data.ledger.aptos_version)) <= 10
-
-    if (!error) {
-        aptosChainId.text(data.ledger.aptos_chain_id)
-        aptosVersion.text(data.ledger.aptos_version)
-    }
 
     if (!error) {
         globalThis.ledgerVersion = ledger.ledger_version
@@ -124,11 +117,11 @@ globalThis.updateLedgerData = (data) => {
         if (in_chain) {
             chainStatus.parent().addClass("bg-green")
             chainStatus.text("IN CHAIN")
-            chainOk.html($("<span>").addClass("mif-checkmark")).addClass("fg-green");
+            chainOk.addClass("fg-green");
         } else {
             chainStatus.parent().addClass("bg-red")
             chainStatus.text("UPDATE NODE")
-            chainOk.html($("<span>").addClass("mif-cross")).addClass("fg-red");
+            chainOk.addClass("fg-red");
         }
     } else {
         chainStatus.parent().addClass("bg-red")
@@ -195,54 +188,22 @@ globalThis.updateMetricData = (d) => {
     const nodeType = $("#node-type")
     const nodeTypeIcon = $("#node-type-icon").removeClassBy("fg-")
     const networkIcon = $("#network-icon").removeClassBy("fg-")
+    const versionIcon = $("#version-icon").removeClassBy("fg-")
 
-    // syncStatus.parent().removeClassBy("bg-").addClass("fg-white")
 
     if (status) {
         nodeTypeIcon.addClass("fg-green")
         networkIcon.addClass("fg-green")
+        versionIcon.addClass("fg-green")
     }
 
     if (metric.is_validator) {
-        nodeType.text(`Validator Node`)
+        nodeType.text(`Validator`)
         nodeTypeIcon.html($("<span>").addClass("mif-user-secret"));
-
-        // if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_executed_transactions) <= 2 ) {
-        //
-        //     if (+ledgerVersion > 0 && +metric.sync_synced > (+ledgerVersion + 10)) {
-        //         syncStatus.parent().addClass("bg-cyan")
-        //         syncStatus.text("CATCHUP")
-        //     } else {
-        //         syncStatus.parent().addClass("bg-green")
-        //         syncStatus.text("SYNCED")
-        //     }
-        // } else {
-        //     syncStatus.parent().addClass("bg-red")
-        //     syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
-        // }
     } else {
-        nodeType.text(`Full Node`)
+        nodeType.text(`FullNode`)
         nodeTypeIcon.html($("<span>").addClass("mif-organization"));
-
-        // let nodeStateColor, nodeStateText
-        // switch (metric.node_sync_state) {
-        //     case 0 : nodeStateColor = 'bg-cyan'; nodeStateText = 'CATCHUP'; break;
-        //     case 1 : nodeStateColor = 'bg-green'; nodeStateText = 'SYNCED'; break;
-        //     default: nodeStateColor = 'bg-violet'; nodeStateText = 'UNKNOWN'
-        // }
-        //
-        // syncStatus.parent().addClass(nodeStateColor)
-        // syncStatus.text(nodeStateText)
-        //
-        // if (+metric.sync_synced > 0 && Math.abs(metric.sync_synced - metric.sync_applied_transaction_outputs) <= 2 ) {
-        //     syncStatus.parent().addClass("bg-green")
-        //     syncStatus.text("SYNCED/SYNCING")
-        // } else {
-        //     syncStatus.parent().addClass("bg-red")
-        //     syncStatus.text(!status ? "NO DATA" : "NOT SYNCED")
-        // }
     }
-
 
     const peerStatus = $("#peer_status")
 
@@ -286,4 +247,17 @@ globalThis.updatePortTest = data => {
         pr.removeClassBy("bg-").addClass(ports[port] ? "bg-green" : "bg-red").addClass("fg-white")
         el.html(`${targets[port]}`)
     }
+}
+
+globalThis.updateAptosState = data => {
+    if (!data) return
+    globalThis.aptosState = data
+    const {chain_id, ledger_version, ledger_timestamp, epoch} = data
+    const aptosVersion = $("#aptos-version")
+    const aptosChain = $("#aptos-chain-id")
+    const aptosEpoch = $("#aptos-epoch")
+    const aptosTimestamp = $("#aptos-timestamp")
+
+    aptosChain.text(n2f(chain_id))
+    aptosVersion.text(n2f(ledger_version))
 }

@@ -41,6 +41,10 @@ export const websocket = (server) => {
                     })
                     break
                 }
+                case "aptos": {
+                    response(ws, channel, globalThis.aptosState)
+                    break
+                }
             }
         })
     })

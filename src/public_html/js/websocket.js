@@ -36,6 +36,15 @@ const connect = () => {
     }
 }
 
+const request = (channel = 'ping', data = {}, ws = globalThis.webSocket) => {
+    if(isOpen(ws)) {
+        ws.send(JSON.stringify({
+            channel,
+            data
+        }))
+    }
+}
+
 const wsMessageController = (ws, response) => {
     const {channel, data} = response
 
@@ -44,52 +53,49 @@ const wsMessageController = (ws, response) => {
     }
 
     const requestApiData = ws => {
-        if (isOpen(ws) && nodeAddress) {
-            ws.send(JSON.stringify({
-                channel: 'api',
-                data: {
+        if (nodeAddress) {
+            request('api', {
                     host: nodeAddress,
                     port: apiPort,
                     prot: protAddress
                 }
-            }))
+            )
         } else {
             setTimeout(requestApiData, 5000, ws)
         }
     }
 
     const requestMetricsData = ws => {
-        if (isOpen(ws) && nodeAddress) {
+        if (nodeAddress) {
             $("#activity").show()
-            ws.send(JSON.stringify({
-                channel: 'metrics',
-                data: {
+            request('metrics', {
                     host: nodeAddress,
                     port: metricPort,
                     prot: protAddress
                 }
-            }))
+            )
         } else {
             setTimeout(requestMetricsData, 5000, ws)
         }
     }
 
     const requestPortsTest = ws => {
-        if (isOpen(ws) && nodeAddress) {
-            ws.send(JSON.stringify({
-                channel: 'ports',
-                data: {
-                    host: nodeAddress,
-                    ports: {
-                        api: apiPort,
-                        metrics: metricPort,
-                        seed: seedPort
-                    }
+        if (nodeAddress) {
+            request('ports', {
+                host: nodeAddress,
+                ports: {
+                    api: apiPort,
+                    metrics: metricPort,
+                    seed: seedPort
                 }
-            }))
+            })
         } else {
             setTimeout(requestPortsTest, 5000, ws)
         }
+    }
+
+    const requestAptosState = ws => {
+        request('aptos')
     }
 
     switch(channel) {
@@ -97,6 +103,7 @@ const wsMessageController = (ws, response) => {
             requestApiData(ws)
             requestMetricsData(ws)
             requestPortsTest(ws)
+            requestAptosState(ws)
             break
         }
         case 'metrics': {
@@ -114,6 +121,11 @@ const wsMessageController = (ws, response) => {
         case 'ports': {
             updatePortTest(data)
             setTimeout(requestPortsTest, 5000, ws)
+            break
+        }
+        case 'aptos': {
+            updateAptosState(data)
+            setTimeout(requestAptosState, 1000, ws)
             break
         }
     }

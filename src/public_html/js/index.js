@@ -1,3 +1,7 @@
+globalThis.aptosState = {
+    chain_id: 0, ledger_version: 0, ledger_timestamp: 0, epoch: 0
+}
+
 globalThis.n2f = (n) => Number(n).format(0, null, " ", ".")
 
 globalThis.enterAddress = (form) => {
@@ -15,9 +19,9 @@ globalThis.enterAddress = (form) => {
         $("#port-"+p).parent().removeClassBy("bg-")
     }
 
-    $("#node-type-icon").removeClassBy("fg-").html($("<span>").addClass("mif-question"));
-    $("#chain-ok").removeClassBy("fg-").html($("<span>").addClass("mif-question"));
-    $("#network-icon").removeClassBy("fg-");
+    $("#node-type-icon").removeClassBy("fg-").html($("<span>").addClass("mif-question"))
+    $("#chain-ok").removeClassBy("fg-")
+    $("#network-icon").removeClassBy("fg-")
 
     const address = form.elements["node_address"].value.trim()
     const api = +(form.elements["api_port"].value.trim()) || 8080
