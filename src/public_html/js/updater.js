@@ -1,73 +1,82 @@
 const METRIC_DEFAULT = {
-    "connections_inbound": "0",
-    "connections_outbound": "0",
-    "sent_requests_total": "0",
-    "sent_requests_summary_server": "0",
-    "jellyfish_internal_encoded_bytes": "0",
-    "jellyfish_leaf_encoded_bytes": "0",
-    "jellyfish_storage_reads": "0",
-    "metrics_families_over_1000": "0",
-    "metrics_total": "0",
-    "metrics_total_bytes": "0",
-    "network_direct_send_bytes_received": "0",
-    "network_direct_send_bytes_sent": "0",
-    "network_direct_send_messages_received": "0",
-    "network_direct_send_messages_sent": "0",
-    "network_pending_health_check_events_dequeued": "0",
-    "network_pending_health_check_events_enqueued": "0",
-    "network_rpc_bytes_received_request": "0",
-    "network_rpc_bytes_received_response": "0",
-    "network_rpc_bytes_sent_request": "0",
-    "network_rpc_bytes_sent_response": "0",
-    "network_rpc_messages_received_request": "0",
-    "network_rpc_messages_received_response": "0",
-    "network_rpc_messages_sent_request": "0",
-    "network_rpc_messages_sent_response": "0",
-    "secure_net_events_connect": "0",
-    "secure_net_events_read": "0",
-    "simple_onchain_discovery_counts": "0",
-    "state_sync_pending_network_events_dequeued": "0",
-    "state_sync_pending_network_events_enqueued": "0",
-    "state_sync_reconfig_count": "0",
-    "state_sync_timeout_total": "0",
-    "sync_committed": "0",
-    "sync_highest": "0",
-    "sync_synced": "0",
-    "sync_target": "0",
-    "storage_committed_txns": "0",
-    "storage_latest_account_count": "0",
-    "storage_latest_transaction_version": "0",
-    "storage_ledger_events_created": "0",
-    "storage_ledger_new_state_leaves": "0",
-    "storage_ledger_new_state_nodes": "0",
-    "storage_ledger_stale_state_leaves": "0",
-    "storage_ledger_stale_state_nodes": "0",
-    "storage_ledger_version": "0",
-    "storage_next_block_epoch": "0",
-    "storage_service_server_pending_network_events_dequeued": "0",
-    "storage_service_server_pending_network_events_enqueued": "0",
-    "storage_service_server_requests_received": "0",
-    "storage_service_server_responses_sent": "0",
-    "struct_log_count": "0",
-    "struct_log_processed_count": "0",
-    "vm_num_txns_per_block_sum": "0",
-    "vm_num_txns_per_block_count": "0",
-    "vm_system_transactions_executed": "0",
-    "vm_txn_gas_usage_sum": "0",
-    "vm_txn_gas_usage_count": "0",
-    "vm_user_transactions_executed": "0",
-    "core_mempool_gc_event_count_client_expiration": "0",
-    "core_mempool_gc_event_count_system_ttl": "0",
-    "shared_mempool_events_new_peer": "0",
-    "system_physical_core_count": "0",
-    "system_total_memory": "0",
-    "system_used_memory": "0",
-    "sync_timestamp_committed": "0",
-    "sync_timestamp_synced": "0",
-    "sync_timestamp_real": "0",
-    "data_client_success_responses": "0",
-    "data_client_success_responses_summary_server": "0",
-    "mempool_active_upstream_peers_count": "0",
+}
+
+globalThis.memoryChart = null
+
+const getFakeData = (len, inc = 2000, init = 0) => {
+    const a = []
+    let d = datetime().time() - inc * len
+    for (let i = 0; i < len; i++) {
+        a.push([d, init])
+        d += inc
+    }
+    return a
+}
+
+const chartOptions = {
+    border: {
+        color: "transparent"
+    },
+    background: "transparent",
+    height: 80,
+    legend: {
+        position: 'top-left',
+        vertical: true,
+        background: "#fff",
+        margin: {
+            left: 4,
+            top: 4
+        },
+        border: {
+            color: "#fafbfc"
+        },
+        padding: 2,
+        font: {
+            color: "#24292e",
+            size: 10
+        },
+    },
+    axis: {
+        x: {
+            line: {
+                color: "#fafbfc",
+                shortLineSize: 0
+            },
+            label: {
+                count: 10,
+                fixed: 0,
+                color: "#24292e",
+                font: {
+                    size: 10
+                }
+            },
+            skip: 2,
+        },
+        y: {
+            line: {
+                color: "#fafbfc"
+            },
+            label: {
+                count: 10,
+                fixed: 0,
+                color: "#24292e",
+                font: {
+                    size: 10
+                },
+                skip: 2,
+                showLabel: false
+            }
+        }
+    },
+    arrows: false,
+    padding: 0,
+    margin: 0,
+    boundaries: {
+        maxY: 0,
+        minY: 0
+    },
+    tooltip: false,
+    onDrawLabelX: () => ''
 }
 
 globalThis.updateLedgerData = (data) => {
@@ -81,13 +90,13 @@ globalThis.updateLedgerData = (data) => {
     const syncStatus = $("#sync_status")
 
     const in_chain = !error && +(data.ledger.chain_id) === +(data.ledger.aptos_chain_id)
-    const synced = !error && Math.abs(+(data.ledger.ledger_version) - +(data.ledger.aptos_version)) <= 10
+    const synced = !error && Math.abs(+(data.ledger.ledger_version) - +(data.ledger.aptos_version)) <= (config.aptos.accuracy || 100)
 
     if (!error) {
         globalThis.ledgerVersion = ledger.ledger_version
         $("#chain_id").text(ledger.chain_id)
         $("#epoch").text(ledger.epoch)
-        $("#ledger_version").text(ledger.ledger_version)
+        $("#ledger_version").text(n2f(ledger.ledger_version))
         $("#ledger_timestamp").text(datetime(ledger.ledger_timestamp / 1000).format(globalThis.dateFormat.full))
     } else {
         globalThis.ledgerVersion = -1
@@ -180,9 +189,56 @@ globalThis.updateMetricData = (d) => {
         if (["sync_timestamp_committed", "sync_timestamp_real", "sync_timestamp_synced"].includes(o)) {
             $(`#${o}`).text(datetime(+metric[o]).format(globalThis.dateFormat.full))
         } else {
-            $(`#${o}`).text(n2f(metric[o]))
+            if (['system_total_memory'].includes(o)) {
+                $(`#${o}`).text(n2f(metric[o]/1024**2))
+            } else {
+                $(`#${o}`).text(n2f(metric[o]))
+            }
         }
     }
+
+    if (!globalThis.memoryChart) {
+        globalThis.memoryChart = chart.areaChart("#memory-usage-chart", [
+            getFakeData(100),
+            getFakeData(100)
+        ], {
+            ...chartOptions,
+            // background: chartBackground,
+            axis: {
+                x: {
+                    line: {
+                        color: "transparent"
+                    }
+                },
+                y: {
+                    line: {
+                        color: "transparent"
+                    }
+                },
+            },
+            margin: 0,
+            legend: false,
+            colors: [Metro.colors.toRGBA('#7dc37b', .5), Metro.colors.toRGBA('#aa00ff', .5)],
+            areas: [
+                {
+                    name: "Free"
+                },
+                {
+                    name: "Used"
+                }
+            ]
+        })
+    }
+
+    const totalMem = +(metric['system_total_memory'])
+    const usedMem = +(metric['system_used_memory'])
+
+    globalThis.memoryChart.setBoundaries({maxY: totalMem})
+    globalThis.memoryChart.add(0, [datetime().time() - 2000, totalMem], true)
+    globalThis.memoryChart.add(1, [datetime().time() - 2000, usedMem], true)
+
+    $("#memory-usage").html(`${Math.ceil(usedMem * 100 / totalMem)}%`)
+    $("#memory-usage-val").html(`${(usedMem / 1024**2).toFixed(2)}`)
 
     // const syncStatus = $("#sync_status")
     const nodeType = $("#node-type")
@@ -200,9 +256,13 @@ globalThis.updateMetricData = (d) => {
     if (metric.is_validator) {
         nodeType.text(`Validator`)
         nodeTypeIcon.html($("<span>").addClass("mif-user-secret"));
+        $("#fullnode-state").hide()
+        $("#validator-state").show()
     } else {
         nodeType.text(`FullNode`)
         nodeTypeIcon.html($("<span>").addClass("mif-organization"));
+        $("#fullnode-state").show()
+        $("#validator-state").hide()
     }
 
     const peerStatus = $("#peer_status")

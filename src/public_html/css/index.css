@@ -1,9 +1,25 @@
+:root {
+  --color-border: #dfdfdf;
+  --color-value: #1f1f1f;
+}
+.value {
+  color: var(--color-value);
+}
+.bd-system,
+.bd-default,
+.panel,
+.panel-title,
+td,
+.input,
+.select {
+  border-color: var(--color-border) !important;
+}
 .panel {
   height: 100%;
 }
 .panel-content {
   display: flex!important;
-  align-items: center;
+  align-items: start;
   height: 100%!important;
 }
 .port-wrapper {

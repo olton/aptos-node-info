@@ -1,19 +1,26 @@
 {
+    "aptos": {
+        "network": "devnet",
+        "rest": "https://fullnode.devnet.aptoslabs.com/"
+    },
     "server": {
         "host": "localhost",
-        "port": 8000,
+        "port": 80,
         "ssl": {
             "cert": "",
             "key": "",
-            "port": 8043
+            "port": 7043
         }
     },
     "client": {
         "theme": "auto",
         "server": {
             "host": "localhost",
-            "port": 8000,
+            "port": 80,
             "secure": false
+        },
+        "aptos": {
+            "accuracy": 100
         }
     },
     "date-format": {

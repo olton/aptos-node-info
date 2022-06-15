@@ -1,57 +1,52 @@
 div( data-role="panel" data-title-caption="SYNC STATE / CONSENSUS" )
-    div.d-flex.flex-column.w-100
-        div.text-bold.reduce-3 SYNC STATE
-        table.table.subcompact.cell-border
-            tr
-                td.no-wrap Executed transactions
-                td.text-right.value
-                    span#sync_executed_transactions 0
+    div.w-100
+        div.row.border-bottom.bd-system.pb-2
+            div.cell-12
+                div.text-bold.text-center
+                    div.reduce-3 NODE HEIGHT
+                    div.text-leader.text-bold.value#sync_synced 0
 
-            tr
-                td Applied transactions
-                td.text-right.value
-                    span#sync_applied_transaction_outputs 0
+        div.mt-4#fullnode-state
+            table.table.subcompact.cell-border
+                tr
+                    td.no-wrap Executed transactions
+                    td.text-right.value
+                        span#sync_executed_transactions 0
 
-            tr
-                td Synced Blocks
-                td.text-right.value
-                    span#sync_synced 0
+                tr
+                    td Applied transactions
+                    td.text-right.value
+                        span#sync_applied_transaction_outputs 0
 
-        div.mt-2.text-bold.reduce-3 ADVERTISED
-        table.table.subcompact.cell-border
-            tr
-                td.no-wrap Account State
-                td.text-right.value
-                    span#advretised_account_states 0
+                tr
+                    td.no-wrap Account State
+                    td.text-right.value
+                        span#advretised_account_states 0
 
-            tr
-                td Ledger Info
-                td.text-right.value
-                    span#advretised_ledger_infos 0
+                tr
+                    td Transaction Outputs
+                    td.text-right.value
+                        span#advretised_transaction_outputs 0
 
-            tr
-                td Transaction Outputs
-                td.text-right.value
-                    span#advretised_transaction_outputs 0
+                tr
+                    td Transactions
+                    td.text-right.value
+                        span#advretised_transactions 0
 
-            tr
-                td Transactions
-                td.text-right.value
-                    span#advretised_transactions 0
 
-        //div.mt-2.text-bold.reduce-3 CONSENSUS
-        //table.table.subcompact.cell-border
-        //    tr
-        //        td.no-wrap Current Round
-        //        td.text-right.value
-        //            span#consensus_current_round 0
-        //
-        //    tr
-        //        td Last Commited Round
-        //        td.text-right.value
-        //            span#consensus_last_committed_round 0
-        //
-        //    tr
-        //        td Consensus Epoch
-        //        td.text-right.value
-        //            span#consensus_epoch 0
+        div(style="display: none")#validator-state
+            table.table.subcompact.cell-border
+                tr
+                    td.no-wrap Current Round
+                    td.text-right.value
+                        span#consensus_current_round 0
+
+                tr
+                    td Last Commited Round
+                    td.text-right.value
+                        span#consensus_last_committed_round 0
+
+                tr
+                    td Consensus Epoch
+                    td.text-right.value
+                        span#consensus_epoch 0

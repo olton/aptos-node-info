@@ -23,6 +23,9 @@ globalThis.enterAddress = (form) => {
     $("#chain-ok").removeClassBy("fg-")
     $("#network-icon").removeClassBy("fg-")
 
+    $("#memory-usage-chart").clear()
+    globalThis.memoryChart = null
+
     const address = form.elements["node_address"].value.trim()
     const api = +(form.elements["api_port"].value.trim()) || 8080
     const metric = +(form.elements["metric_port"].value.trim()) || 9101
@@ -48,6 +51,12 @@ globalThis.currentTime = () => {
     setTimeout( currentTime, 1000)
 }
 
+const changeColors = () => {
+    globalThis.chartLineColor = globalThis.darkMode ? '#3c424b' : "#e5e5e5"
+    globalThis.chartLabelColor = globalThis.darkMode ? "#fff" : "#000"
+    globalThis.chartBackground = globalThis.darkMode ? "#1b2125" : "#ffffff"
+}
+
 ;$(() => {
 
     globalThis.darkMode = $.dark
@@ -62,6 +71,8 @@ globalThis.currentTime = () => {
         $("html").addClass("dark-mode")
     }
 
+    changeColors()
+
     $(".light-mode-switch, .dark-mode-switch").on("click", () => {
         globalThis.darkMode = !globalThis.darkMode
         Metro.storage.setItem("darkMode", darkMode)
@@ -70,6 +81,7 @@ globalThis.currentTime = () => {
         } else {
             $("html").removeClass("dark-mode")
         }
+        changeColors()
     })
 
     const ports = {
