@@ -197,48 +197,48 @@ globalThis.updateMetricData = (d) => {
         }
     }
 
-    if (!globalThis.memoryChart) {
-        globalThis.memoryChart = chart.areaChart("#memory-usage-chart", [
-            getFakeData(100),
-            getFakeData(100)
-        ], {
-            ...chartOptions,
-            // background: chartBackground,
-            axis: {
-                x: {
-                    line: {
-                        color: "transparent"
-                    }
-                },
-                y: {
-                    line: {
-                        color: "transparent"
-                    }
-                },
-            },
-            margin: 0,
-            legend: false,
-            colors: [Metro.colors.toRGBA('#7dc37b', .5), Metro.colors.toRGBA('#aa00ff', .5)],
-            areas: [
-                {
-                    name: "Free"
-                },
-                {
-                    name: "Used"
-                }
-            ]
-        })
-    }
-
-    const totalMem = +(metric['system_total_memory'])
-    const usedMem = +(metric['system_used_memory'])
-
-    globalThis.memoryChart.setBoundaries({maxY: totalMem})
-    globalThis.memoryChart.add(0, [datetime().time() - 2000, totalMem], true)
-    globalThis.memoryChart.add(1, [datetime().time() - 2000, usedMem], true)
-
-    $("#memory-usage").html(`${Math.ceil(usedMem * 100 / totalMem)}%`)
-    $("#memory-usage-val").html(`${(usedMem / 1024**2).toFixed(2)}`)
+    // if (!globalThis.memoryChart) {
+    //     globalThis.memoryChart = chart.areaChart("#memory-usage-chart", [
+    //         getFakeData(100),
+    //         getFakeData(100)
+    //     ], {
+    //         ...chartOptions,
+    //         // background: chartBackground,
+    //         axis: {
+    //             x: {
+    //                 line: {
+    //                     color: "transparent"
+    //                 }
+    //             },
+    //             y: {
+    //                 line: {
+    //                     color: "transparent"
+    //                 }
+    //             },
+    //         },
+    //         margin: 0,
+    //         legend: false,
+    //         colors: [Metro.colors.toRGBA('#7dc37b', .5), Metro.colors.toRGBA('#aa00ff', .5)],
+    //         areas: [
+    //             {
+    //                 name: "Free"
+    //             },
+    //             {
+    //                 name: "Used"
+    //             }
+    //         ]
+    //     })
+    // }
+    //
+    // const totalMem = +(metric['system_total_memory'])
+    // const usedMem = +(metric['system_used_memory'])
+    //
+    // globalThis.memoryChart.setBoundaries({maxY: totalMem})
+    // globalThis.memoryChart.add(0, [datetime().time() - 2000, totalMem], true)
+    // globalThis.memoryChart.add(1, [datetime().time() - 2000, usedMem], true)
+    //
+    // $("#memory-usage").html(`${Math.ceil(usedMem * 100 / totalMem)}%`)
+    // $("#memory-usage-val").html(`${(usedMem / 1024**2).toFixed(2)}`)
 
     // const syncStatus = $("#sync_status")
     const nodeType = $("#node-type")
