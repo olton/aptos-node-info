@@ -7,6 +7,23 @@ export const parseMetrics = data => {
 
         let val = l.split(" ")[1]
 
+        if (l.includes("aptos_network_app_inbound_traffic_sum")) {
+            if (l.includes("HealthCheckerRpc")) counters.network_app_inbound_traffic_sum_HealthCheckerRpc = val
+            if (l.includes("StorageServiceRpc")) counters.network_app_inbound_traffic_sum_StorageServiceRpc = val
+        }
+        if (l.includes("aptos_network_app_inbound_traffic_count")) {
+            if (l.includes("HealthCheckerRpc")) counters.network_app_inbound_traffic_count_HealthCheckerRpc = val
+            if (l.includes("StorageServiceRpc")) counters.network_app_inbound_traffic_count_StorageServiceRpc = val
+        }
+        if (l.includes("aptos_network_app_outbound_traffic_sum")) {
+            if (l.includes("HealthCheckerRpc")) counters.network_app_outbound_traffic_sum_HealthCheckerRpc = val
+            if (l.includes("StorageServiceRpc")) counters.network_app_outbound_traffic_sum_StorageServiceRpc = val
+        }
+        if (l.includes("aptos_network_app_outbound_traffic_count")) {
+            if (l.includes("HealthCheckerRpc")) counters.network_app_outbound_traffic_count_HealthCheckerRpc = val
+            if (l.includes("StorageServiceRpc")) counters.network_app_outbound_traffic_count_StorageServiceRpc = val
+        }
+
         if (l.includes("aptos_consensus_current_round")) {
             counters.is_validator = true
             counters.consensus_current_round = val

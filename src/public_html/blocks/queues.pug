@@ -1,18 +1,26 @@
 div( data-role="panel" data-title-caption="QUEUES" )
-    table.table.subcompact.cell-border
-        tr
-            td.no-wrap Health Dequeued
-            td.text-right.value
-                span#network_pending_health_check_events_dequeued 0
-        tr
-            td.no-wrap Health Enqueued
-            td.text-right.value
-                span#network_pending_health_check_events_enqueued 0
-        tr
-            td.no-wrap Storage Dequeued
-            td.text-right.value
-                span#storage_service_server_pending_network_events_dequeued 0
-        tr
-            td.no-wrap Storage Enqueued
-            td.text-right.value
-                span#storage_service_server_pending_network_events_enqueued 0
+    div.w-100
+        div.row.border-bottom.bd-system.pb-2
+            div.cell-6
+                div.text-bold.text-center
+                    div.reduce-3 HEALTH
+                    div.reduce-5 DEQUEUED
+                    div.text-leader2.text-bold.value#network_pending_health_check_events_dequeued 0
+            div.cell-6.border-left.bd-system
+                div.text-bold.text-center
+                    div.reduce-3 HEALTH
+                    div.reduce-5 ENQUEUED
+                    div.text-leader2.text-bold.value#network_pending_health_check_events_enqueued 0
+
+        div.row.border-bottom.bd-system.pb-2
+            div.cell-6
+                div.text-bold.text-center
+                    div.reduce-3 STORAGE
+                    div.reduce-5 DEQUEUED
+                    div.text-leader2.text-bold.value#storage_service_server_pending_network_events_dequeued 0
+            div.cell-6.border-left.bd-system
+                div.text-bold.text-center
+                    div.reduce-3 STORAGE
+                    div.reduce-5 ENQUEUED
+                    div.text-leader2.text-bold.value#storage_service_server_pending_network_events_enqueued 0
+

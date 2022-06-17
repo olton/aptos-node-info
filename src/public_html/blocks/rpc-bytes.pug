@@ -1,18 +1,26 @@
 div( data-role="panel" data-title-caption="RPC BYTES" )
-    table.table.subcompact.cell-border
-        tr
-            td.no-wrap Received Request
-            td.text-right.value
-                span#network_rpc_bytes_received_request 0
-        tr
-            td.no-wrap Received Response
-            td.text-right.value
-                span#network_rpc_bytes_received_response 0
-        tr
-            td.no-wrap Sent Request
-            td.text-right.value
-                span#network_rpc_bytes_sent_request 0
-        tr
-            td.no-wrap Sent Response
-            td.text-right.value
-                span#network_rpc_bytes_sent_response 0
+    div.w-100
+        div.row.border-bottom.bd-system.pb-2
+            div.cell-6
+                div.text-bold.text-center
+                    div.reduce-3 REQUESTS
+                    div.reduce-5 RECEIVED
+                    div.text-leader2.text-bold.value#network_rpc_bytes_received_request 0
+            div.cell-6.border-left.bd-system
+                div.text-bold.text-center
+                    div.reduce-3 RESPONSE
+                    div.reduce-5 RECEIVED
+                    div.text-leader2.text-bold.value#network_rpc_bytes_received_response 0
+
+        div.row.border-bottom.bd-system.pb-2
+            div.cell-6
+                div.text-bold.text-center
+                    div.reduce-3 REQUESTS
+                    div.reduce-5 SENT
+                    div.text-leader2.text-bold.value#network_rpc_bytes_sent_request 0
+            div.cell-6.border-left.bd-system
+                div.text-bold.text-center
+                    div.reduce-3 RESPONSE
+                    div.reduce-5 SENT
+                    div.text-leader2.text-bold.value#network_rpc_bytes_sent_response 0
+
