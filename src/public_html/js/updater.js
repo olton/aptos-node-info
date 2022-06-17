@@ -172,7 +172,7 @@ globalThis.updateHealthData = (data) => {
 
 globalThis.updateMetricData = (d) => {
     let metric
-    const status = typeof d.system_physical_core_count !== "undefined"
+    const status = typeof d.connections_outbound !== "undefined"
     const errorLog = $("#error-log-metric").clear()
 
     if (!status) {
