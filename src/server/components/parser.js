@@ -300,5 +300,7 @@ export const parseMetrics = data => {
 
     }
 
+    console.log(counters)
+
     return counters
 }

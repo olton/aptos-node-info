@@ -172,8 +172,10 @@ globalThis.updateHealthData = (data) => {
 
 globalThis.updateMetricData = (d) => {
     let metric
-    const status = typeof d.connections_outbound !== "undefined"
+    const status = typeof d.storage_ledger_version !== "undefined"
     const errorLog = $("#error-log-metric").clear()
+
+    console.log(config)
 
     if (!status) {
         if (typeof d === "string")
@@ -184,6 +186,8 @@ globalThis.updateMetricData = (d) => {
     } else {
         metric = (d)
     }
+
+    console.log(metric)
 
     for (let o in metric) {
         if (["sync_timestamp_committed", "sync_timestamp_real", "sync_timestamp_synced"].includes(o)) {
