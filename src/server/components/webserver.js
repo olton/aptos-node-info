@@ -57,10 +57,6 @@ export const runWebServer = () => {
             key: fs.readFileSync(key[0] === "." ? path.resolve(serverPath, key) : key),
             cert: fs.readFileSync(cert[0] === "." ? path.resolve(serverPath, cert) : cert)
         }, app)
-        // httpsWebserver2 = https.createServer({
-        //     key: fs.readFileSync(key[0] === "." ? path.resolve(serverPath, key) : key),
-        //     cert: fs.readFileSync(cert[0] === "." ? path.resolve(serverPath, cert) : cert)
-        // }, app)
     } else {
         httpWebserver = http.createServer({}, app)
     }
@@ -77,11 +73,7 @@ export const runWebServer = () => {
         httpsWebserver.listen(config.server.ssl.port || config.server.port, () => {
             info(runInfo)
         })
-        // httpsWebserver2.listen(8043, () => {
-        //     info(runInfo)
-        // })
     }
 
     websocket(ssl ? httpsWebserver : httpWebserver)
-    // if (ssl) websocket(httpsWebserver2)
 }

@@ -277,7 +277,7 @@ globalThis.updateMetricData = (d) => {
         peerStatus.text("OK")
     } else {
         peerStatus.parent().addClass(metric.is_validator ? "bg-violet" : "bg-red")
-        peerStatus.text("NO PEERS")
+        peerStatus.text("NO PEERS DATA")
     }
 
     const metricStatus = $("#metric_status")

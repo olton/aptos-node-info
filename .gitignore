@@ -10,3 +10,4 @@ config.json
 !example.config.json
 *.crt
 *.key
+.vscode
