@@ -30,7 +30,7 @@ export const getHostMetrics = async ({host = "", port = 9101, prot = "http"}) =>
 }
 
 export const getHostApiData = async ({path = LEDGER_ENDPOINT, json = true, host = "", port = 9101, prot = "http"}) => {
-    const link = `${prot}://${host}:${port}${path}`
+    const link = `${prot.toLowerCase()}://${host}${port === 80 || port === 443 ? '' : ':'+port}${path}`
     let result
 
     const controller = new AbortController()

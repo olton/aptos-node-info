@@ -30,7 +30,7 @@ globalThis.enterAddress = (form) => {
     const api = +(form.elements["api_port"].value.trim()) || 8080
     const metric = +(form.elements["metric_port"].value.trim()) || 9101
     const seed = +(form.elements["seed_port"].value.trim()) || 6180
-    const prot = form.elements["prot_address"].value.trim() || "http"
+    // const prot = form.elements["prot_address"].value.trim() || "http"
 
     if (!address) {
         nodeAddress = ""
@@ -43,7 +43,7 @@ globalThis.enterAddress = (form) => {
     apiPort = +api
     metricPort = +metric
     seedPort = +seed
-    protAddress = prot
+    // protAddress = prot
 }
 
 globalThis.currentTime = () => {
@@ -82,6 +82,23 @@ const changeColors = () => {
             $("html").removeClass("dark-mode")
         }
         changeColors()
+    })
+
+    globalThis.portsProt = {
+        api: 'HTTP',
+        metrics: 'HTTP',
+        seed: 'HTTP'
+    }
+
+    $(".port-protocol-switcher").on("click", function() {
+        const $el = $(this)
+        const portType = $el.attr("data-port-type")
+        let val = $el.text()
+
+        val = (val === 'HTTP') ? 'HTTPS' : 'HTTP'
+
+        $el.text(val)
+        portsProt[portType] = val
     })
 
     const ports = {

@@ -77,6 +77,15 @@ td,
   font-size: 32px;
   color: #e8e8e8;
 }
+.input .append {
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 10px;
+  background: transparent;
+  color: var(--color-accent);
+  cursor: pointer;
+  line-height: 1;
+}
 html.dark-mode {
   --body-background: #1e2228;
   --color-text: #adbaa9;

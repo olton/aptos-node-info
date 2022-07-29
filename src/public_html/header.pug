@@ -23,19 +23,15 @@ section.container-fluid
     div.row
         div.cell-md-12.text-center.order-3.order-md-2
             form#address-form.address-form.row(action="javascript:" onsubmit="enterAddress(this)")
-                div.cell-md-6.port-wrapper
-                    select.reduce-2.select(style="width: 80px" name="prot_address" title="Server Protocol")
-                        option(value="http") http://
-                        option(value="https") https://
-
+                div.cell-md-4.port-wrapper
                     input(type="text" data-role="input" name="node_address" placeholder="Enter clear IP address or Domain name" data-prepend="ADR" title="Your Server IP or Domain Name")
-                div.cell-md-6.port-wrapper
+                div.cell-md-8.port-wrapper
                     div.port
-                        input(type="text" data-role="input" name="api_port" placeholder="8080" data-prepend="API" title="API Port Number" data-clear-button="false")
+                        input(data-append="<small class='port-protocol-switcher' data-port-type='api'>HTTP</small>" type="text" data-role="input" name="api_port" placeholder="8080" data-prepend="API" title="API Port Number" data-clear-button="false")
                     div.port.ml-1
-                        input(type="text" data-role="input" name="metric_port" placeholder="9101" data-prepend="MET" title="Metrics Port Number" data-clear-button="false")
+                        input(data-append="<small class='port-protocol-switcher' data-port-type='metrics'>HTTP</small>" type="text" data-role="input" name="metric_port" placeholder="9101" data-prepend="MET" title="Metrics Port Number" data-clear-button="false")
                     div.port.ml-1
-                        input(type="text" data-role="input" name="seed_port" placeholder="6180" data-prepend="SEED" title="Seed Port Number" data-clear-button="false")
+                        input( type="text" data-role="input" name="seed_port" placeholder="6180" data-prepend="SEED" title="Seed Port Number" data-clear-button="false")
                     button.ml-1.button.info(type="submit")
                         span.mif-search
 

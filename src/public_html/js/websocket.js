@@ -57,7 +57,7 @@ const wsMessageController = (ws, response) => {
             request('api', {
                     host: nodeAddress,
                     port: apiPort,
-                    prot: protAddress
+                    prot: globalThis.portsProt.api
                 }
             )
         } else {
@@ -71,7 +71,7 @@ const wsMessageController = (ws, response) => {
             request('metrics', {
                     host: nodeAddress,
                     port: metricPort,
-                    prot: protAddress
+                    prot: globalThis.portsProt.metrics
                 }
             )
         } else {

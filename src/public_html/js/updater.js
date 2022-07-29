@@ -134,7 +134,7 @@ globalThis.updateLedgerData = (data) => {
         }
     } else {
         chainStatus.parent().addClass("bg-red")
-        chainStatus.text("NO CHAIN DATA")
+        chainStatus.text("NO DATA")
     }
 
     syncStatus.parent().removeClassBy("bg-")
@@ -175,8 +175,6 @@ globalThis.updateMetricData = (d) => {
     const status = typeof d.storage_ledger_version !== "undefined"
     const errorLog = $("#error-log-metric").clear()
 
-    console.log(config)
-
     if (!status) {
         if (typeof d === "string")
         errorLog.html(
@@ -186,8 +184,6 @@ globalThis.updateMetricData = (d) => {
     } else {
         metric = (d)
     }
-
-    console.log(metric)
 
     for (let o in metric) {
         if (["sync_timestamp_committed", "sync_timestamp_real", "sync_timestamp_synced"].includes(o)) {
