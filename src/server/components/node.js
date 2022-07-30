@@ -4,8 +4,8 @@ import {testPort} from "../helpers/test-port.js";
 export const HEALTH_ENDPOINT = '/-/healthy';
 export const LEDGER_ENDPOINT = '/';
 
-export const getHostMetrics = async ({host = "", port = 9101, prot = "http"}) => {
-    const link = `${prot}://${host}:${port}/metrics`
+export const getHostMetrics = async ({host = "", port, prot = "http"}) => {
+    const link = `${prot.toLowerCase()}://${host}${port  && ![443, 80].includes(port) ? ':'+port:''}/metrics`
     let result = ""
 
     const controller = new AbortController()
@@ -29,8 +29,8 @@ export const getHostMetrics = async ({host = "", port = 9101, prot = "http"}) =>
     return result
 }
 
-export const getHostApiData = async ({path = LEDGER_ENDPOINT, json = true, host = "", port = 9101, prot = "http"}) => {
-    const link = `${prot.toLowerCase()}://${host}${port === 80 || port === 443 ? '' : ':'+port}${path}`
+export const getHostApiData = async ({path = LEDGER_ENDPOINT, json = true, host = "", port, prot = "http"}) => {
+    const link = `${prot.toLowerCase()}://${host}${port && ![443, 80].includes(port) ? ':'+port:''}${path}`
     let result
 
     const controller = new AbortController()

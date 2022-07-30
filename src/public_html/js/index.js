@@ -26,11 +26,14 @@ globalThis.enterAddress = (form) => {
     $("#memory-usage-chart").clear()
     globalThis.memoryChart = null
 
-    const address = form.elements["node_address"].value.trim()
-    const api = +(form.elements["api_port"].value.trim()) || 8080
-    const metric = +(form.elements["metric_port"].value.trim()) || 9101
-    const seed = +(form.elements["seed_port"].value.trim()) || 6180
-    // const prot = form.elements["prot_address"].value.trim() || "http"
+    let address = form.elements["node_address"].value.trim()
+    let api = (form.elements["api_port"].value.trim())
+    let metric = (form.elements["metric_port"].value.trim())
+    let seed = (form.elements["seed_port"].value.trim())
+
+    if (api.length === 0) api = 8080
+    if (metric.length === 0) metric = 9101
+    if (seed.length === 0) seed = 6180
 
     if (!address) {
         nodeAddress = ""
@@ -40,10 +43,13 @@ globalThis.enterAddress = (form) => {
     $("#activity").show()
 
     nodeAddress = address
-    apiPort = +api
-    metricPort = +metric
-    seedPort = +seed
-    // protAddress = prot
+    apiPort = (isNaN(api) ? 8080 : +api)
+    metricPort = (isNaN(metric) ? 9101 : +metric)
+    seedPort = (isNaN(seed) ? 6180 : +seed)
+
+    console.log(api, metric, seed)
+    console.log(isNaN(api), isNaN(metric), isNaN(seed))
+    console.log(apiPort, metricPort, seedPort)
 }
 
 globalThis.currentTime = () => {

@@ -304,8 +304,9 @@ globalThis.updatePortTest = data => {
     for(let port in targets){
         const el = $("#port-"+port)
         const pr = el.parent()
+        const portNum = targets[port]
         pr.removeClassBy("bg-").addClass(ports[port] ? "bg-green" : "bg-red").addClass("fg-white")
-        el.html(`${targets[port]}`)
+        el.html(`${!portNum ? 'NOT DEF' : portNum}`)
     }
 }
 
