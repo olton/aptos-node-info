@@ -23,13 +23,10 @@ export const websocket = (server) => {
                     break
                 }
                 case "api": {
-                    const health = await getHostApiData({path: HEALTH_ENDPOINT, json: false, ...data})
-                    const ledger = health.includes(":error:") ?
-                        {error: "Node API not available"} :
-                        await getHostApiData({path: LEDGER_ENDPOINT, json: true, ...data})
+                    const ledger = await getHostApiData({path: LEDGER_ENDPOINT, json: true, ...data})
                     response(ws, channel, {
+                        api: data.ver,
                         ledger,
-                        health,
                         target: data
                     })
                     break

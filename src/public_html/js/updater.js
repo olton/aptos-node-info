@@ -157,16 +157,19 @@ globalThis.updateLedgerData = (data) => {
 }
 
 globalThis.updateHealthData = (data) => {
-    const error = data.health.includes(":error:")
+    const error = !data.ledger
     const n = $("#node_health").removeClassBy("fg-")
+    const v = $("#api_version")
+
+    v.html(data.api)
 
     if (error) {
         n.addClass("fg-red").text("aptos-node:error")
     } else {
-        const h = data.health
-        const c = h && !h.includes("error") ? "fg-green" : "fg-red"
+        const h = +data.ledger.ledger_version
+        const c = h ? "fg-green" : "fg-red"
 
-        n.removeClassBy("fg-").addClass(c).text(h ? h : "aptos-node:error")
+        n.removeClassBy("fg-").addClass(c).text(h ? "aptos-node:ok" : "aptos-node:error")
     }
 }
 
@@ -305,7 +308,7 @@ globalThis.updatePortTest = data => {
         const el = $("#port-"+port)
         const pr = el.parent()
         const portNum = targets[port]
-        pr.removeClassBy("bg-").addClass(ports[port] ? "bg-green" : "bg-red").addClass("fg-white")
+        pr.removeClassBy("bg-").addClass(!portNum ? 'bg-violet' : ports[port] ? "bg-green" : "bg-red").addClass("fg-white")
         el.html(`${!portNum ? 'NOT DEF' : portNum}`)
     }
 }

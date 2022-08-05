@@ -44,36 +44,17 @@ const route = () => {
 }
 
 export const runWebServer = () => {
-    let httpWebserver, httpsWebserver, httpsWebserver2
+    let httpWebserver
 
-    if (ssl) {
-        const {cert, key} = config.server.ssl
-        httpWebserver = http.createServer((req, res)=>{
-            res.writeHead(301,{Location: `https://${req.headers.host}:${config.server.ssl.port || config.server.port}${req.url}`});
-            res.end();
-        })
-
-        httpsWebserver = https.createServer({
-            key: fs.readFileSync(key[0] === "." ? path.resolve(serverPath, key) : key),
-            cert: fs.readFileSync(cert[0] === "." ? path.resolve(serverPath, cert) : cert)
-        }, app)
-    } else {
-        httpWebserver = http.createServer({}, app)
-    }
+    httpWebserver = http.createServer({}, app)
 
     route()
 
-    const runInfo = `Aptos Informer Server running on ${ssl ? "HTTPS" : "HTTP"} on port ${ssl ? config.server.ssl.port : config.server.port}`
+    const runInfo = `Aptos Informer Server running on http://${config.server.host}:${config.server.port}`
 
     httpWebserver.listen(config.server.port, () => {
         info(runInfo)
     })
 
-    if (ssl) {
-        httpsWebserver.listen(config.server.ssl.port || config.server.port, () => {
-            info(runInfo)
-        })
-    }
-
-    websocket(ssl ? httpsWebserver : httpWebserver)
+    websocket(httpWebserver)
 }

@@ -47,9 +47,6 @@ globalThis.enterAddress = (form) => {
     metricPort = (isNaN(metric) ? 9101 : +metric)
     seedPort = (isNaN(seed) ? 6180 : +seed)
 
-    console.log(api, metric, seed)
-    console.log(isNaN(api), isNaN(metric), isNaN(seed))
-    console.log(apiPort, metricPort, seedPort)
 }
 
 globalThis.currentTime = () => {
@@ -96,6 +93,8 @@ const changeColors = () => {
         seed: 'HTTP'
     }
 
+    globalThis.apiVersion = 'v0'
+
     $(".port-protocol-switcher").on("click", function() {
         const $el = $(this)
         const portType = $el.attr("data-port-type")
@@ -105,6 +104,17 @@ const changeColors = () => {
 
         $el.text(val)
         portsProt[portType] = val
+    })
+
+    $(".api-version-switcher").on("click", function() {
+        const $el = $(this)
+        const version = $el.attr("data-api-version")
+        let val = $el.text()
+
+        val = (val === 'v0') ? 'v1' : 'v0'
+
+        $el.text(val)
+        globalThis.apiVersion = val
     })
 
     const ports = {

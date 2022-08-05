@@ -7,6 +7,10 @@ export const parseMetrics = data => {
 
         let val = l.split(" ")[1]
 
+        if (l.includes("aptos_data_client_connected_peers")) {
+            if (l.includes("prioritized_peer")) counters.connected_peers_priortized = val
+            if (l.includes("regular_peer")) counters.connected_peers_regular = val
+        }
         if (l.includes("aptos_network_app_inbound_traffic_sum")) {
             if (l.includes("HealthCheckerRpc")) counters.network_app_inbound_traffic_sum_HealthCheckerRpc = val
             if (l.includes("StorageServiceRpc")) counters.network_app_inbound_traffic_sum_StorageServiceRpc = val
