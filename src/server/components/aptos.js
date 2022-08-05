@@ -27,5 +27,5 @@ export const getAptosState = async () => {
         }
     }
 
-    setTimeout(getAptosState, 1000)
+    setTimeout(getAptosState, 5000)
 }
