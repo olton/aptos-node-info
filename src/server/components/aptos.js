@@ -8,7 +8,8 @@ export const getAptosState = async () => {
             chain_id: 0,
             epoch: 0,
             ledger_version: 0,
-            ledger_timestamp: 0
+            ledger_timestamp: 0,
+            network: config.aptos.network
         }
         alert(`Aptos Rest Node Error!`, await result.text())
     } else {
@@ -23,7 +24,8 @@ export const getAptosState = async () => {
             chain_id,
             epoch,
             ledger_version,
-            ledger_timestamp
+            ledger_timestamp,
+            network: config.aptos.network
         }
     }
 

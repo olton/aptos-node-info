@@ -39,7 +39,7 @@ globalThis.updateLedgerData = (data) => {
         apiStatus.text("CONNECTED")
     } else {
         apiStatus.parent().addClass("bg-red")
-        apiStatus.text("PORT CLOSED")
+        apiStatus.text("NO API DATA")
     }
 
 
@@ -167,7 +167,7 @@ globalThis.updateMetricData = (d) => {
         metricStatus.text("CONNECTED")
     } else {
         metricStatus.parent().addClass("bg-red")
-        metricStatus.text("PORT CLOSED")
+        metricStatus.text("NO DATA")
     }
 }
 
@@ -196,12 +196,14 @@ globalThis.updatePortTest = data => {
 globalThis.updateAptosState = data => {
     if (!data) return
     globalThis.aptosState = data
-    const {chain_id, ledger_version, ledger_timestamp, epoch} = data
+    const {chain_id, ledger_version, ledger_timestamp, epoch, network} = data
     const aptosVersion = $("#aptos-version")
     const aptosChain = $("#aptos-chain-id")
     const aptosEpoch = $("#aptos-epoch")
     const aptosTimestamp = $("#aptos-timestamp")
+    const aptosNetwork = $("#network")
 
     aptosChain.text(n2f(chain_id))
     aptosVersion.text(n2f(ledger_version))
+    aptosNetwork.html(network.toUpperCase())
 }

@@ -7,7 +7,7 @@ export const LEDGER_ENDPOINT = '/';
 export const getHostMetrics = async ({host = "", port, prot = "http"}) => {
     const link = `${prot.toLowerCase()}://${host}${port  && ![443, 80].includes(port) ? ':'+port:''}/metrics`
     let result = ""
-
+    // console.log(link)
     const controller = new AbortController()
     const timeout = setTimeout(() => {
         controller.abort()
@@ -29,10 +29,10 @@ export const getHostMetrics = async ({host = "", port, prot = "http"}) => {
     return result
 }
 
-export const getHostApiData = async ({ver = 'v0', path = LEDGER_ENDPOINT, json = true, host = "", port, prot = "http"}) => {
-    const link = `${prot.toLowerCase()}://${host}${port && ![443, 80].includes(port) ? ':'+port:''}${path}${ver === 'v0' ? '' : '/v1'}`
+export const getHostApiData = async ({ver = 'none', path = LEDGER_ENDPOINT, json = true, host = "", port, prot = "http"}) => {
+    const link = `${prot.toLowerCase()}://${host}${port && ![443, 80].includes(port) ? ':'+port:''}${path}${ver === 'none' ? '' : ver === 'v1' ? 'v1' : 'v0'}`
     let result
-
+    console.log(link)
     const controller = new AbortController()
     const timeout = setTimeout(() => {
         controller.abort()

@@ -18,7 +18,8 @@ globalThis.aptosState = {
     chain_id: 0,
     epoch: 0,
     ledger_version: 0,
-    ledger_timestamp: 0
+    ledger_timestamp: 0,
+    network: "Unknown"
 }
 
 const pkg = readConfig(""+path.resolve(rootPath, "package.json"))

@@ -93,7 +93,7 @@ const changeColors = () => {
         seed: 'HTTP'
     }
 
-    globalThis.apiVersion = 'v0'
+    globalThis.apiVersion = 'none'
 
     $(".port-protocol-switcher").on("click", function() {
         const $el = $(this)
@@ -108,10 +108,9 @@ const changeColors = () => {
 
     $(".api-version-switcher").on("click", function() {
         const $el = $(this)
-        const version = $el.attr("data-api-version")
         let val = $el.text()
 
-        val = (val === 'v0') ? 'v1' : 'v0'
+        val = (val === 'none') ? 'v1' : val === 'v1' ? "v0" : "none"
 
         $el.text(val)
         globalThis.apiVersion = val
@@ -162,10 +161,4 @@ const changeColors = () => {
     }
 
     currentTime()
-
-    {
-        const {chain = 0, network = 'None'} = aptos
-        $("#chain-id").text(chain)
-        $("#network").text("DEVNET")
-    }
 })
