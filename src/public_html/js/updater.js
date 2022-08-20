@@ -3,82 +3,6 @@ const METRIC_DEFAULT = {
 
 globalThis.memoryChart = null
 
-const getFakeData = (len, inc = 2000, init = 0) => {
-    const a = []
-    let d = datetime().time() - inc * len
-    for (let i = 0; i < len; i++) {
-        a.push([d, init])
-        d += inc
-    }
-    return a
-}
-
-const chartOptions = {
-    border: {
-        color: "transparent"
-    },
-    background: "transparent",
-    height: 80,
-    legend: {
-        position: 'top-left',
-        vertical: true,
-        background: "#fff",
-        margin: {
-            left: 4,
-            top: 4
-        },
-        border: {
-            color: "#fafbfc"
-        },
-        padding: 2,
-        font: {
-            color: "#24292e",
-            size: 10
-        },
-    },
-    axis: {
-        x: {
-            line: {
-                color: "#fafbfc",
-                shortLineSize: 0
-            },
-            label: {
-                count: 10,
-                fixed: 0,
-                color: "#24292e",
-                font: {
-                    size: 10
-                }
-            },
-            skip: 2,
-        },
-        y: {
-            line: {
-                color: "#fafbfc"
-            },
-            label: {
-                count: 10,
-                fixed: 0,
-                color: "#24292e",
-                font: {
-                    size: 10
-                },
-                skip: 2,
-                showLabel: false
-            }
-        }
-    },
-    arrows: false,
-    padding: 0,
-    margin: 0,
-    boundaries: {
-        maxY: 0,
-        minY: 0
-    },
-    tooltip: false,
-    onDrawLabelX: () => ''
-}
-
 globalThis.updateLedgerData = (data) => {
     const ledger = data.ledger
     const target = data.target
@@ -200,50 +124,6 @@ globalThis.updateMetricData = (d) => {
         }
     }
 
-    // if (!globalThis.memoryChart) {
-    //     globalThis.memoryChart = chart.areaChart("#memory-usage-chart", [
-    //         getFakeData(100),
-    //         getFakeData(100)
-    //     ], {
-    //         ...chartOptions,
-    //         // background: chartBackground,
-    //         axis: {
-    //             x: {
-    //                 line: {
-    //                     color: "transparent"
-    //                 }
-    //             },
-    //             y: {
-    //                 line: {
-    //                     color: "transparent"
-    //                 }
-    //             },
-    //         },
-    //         margin: 0,
-    //         legend: false,
-    //         colors: [Metro.colors.toRGBA('#7dc37b', .5), Metro.colors.toRGBA('#aa00ff', .5)],
-    //         areas: [
-    //             {
-    //                 name: "Free"
-    //             },
-    //             {
-    //                 name: "Used"
-    //             }
-    //         ]
-    //     })
-    // }
-    //
-    // const totalMem = +(metric['system_total_memory'])
-    // const usedMem = +(metric['system_used_memory'])
-    //
-    // globalThis.memoryChart.setBoundaries({maxY: totalMem})
-    // globalThis.memoryChart.add(0, [datetime().time() - 2000, totalMem], true)
-    // globalThis.memoryChart.add(1, [datetime().time() - 2000, usedMem], true)
-    //
-    // $("#memory-usage").html(`${Math.ceil(usedMem * 100 / totalMem)}%`)
-    // $("#memory-usage-val").html(`${(usedMem / 1024**2).toFixed(2)}`)
-
-    // const syncStatus = $("#sync_status")
     const nodeType = $("#node-type")
     const nodeTypeIcon = $("#node-type-icon").removeClassBy("fg-")
     const networkIcon = $("#network-icon").removeClassBy("fg-")

@@ -166,6 +166,6 @@ const changeColors = () => {
     {
         const {chain = 0, network = 'None'} = aptos
         $("#chain-id").text(chain)
-        $("#network").text(network)
+        $("#network").text("DEVNET")
     }
 })
