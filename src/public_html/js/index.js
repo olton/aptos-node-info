@@ -164,4 +164,5 @@ const changeColors = () => {
 
     $("#round_block").closest(".panel").hide()
     $("#commited_block").closest(".panel").hide()
+    $("#buffer_block").closest(".panel").hide()
 })

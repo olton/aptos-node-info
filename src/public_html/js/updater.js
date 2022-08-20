@@ -164,6 +164,14 @@ globalThis.updateMetricData = (d) => {
         $("#requests_block").closest(".panel").show()
     }
 
+    if (metric.is_validator) {
+        $("#buffer_block").closest(".panel").show()
+        $("#traffic_block").closest(".panel").hide()
+    } else {
+        $("#buffer_block").closest(".panel").hide()
+        $("#traffic_block").closest(".panel").show()
+    }
+
     const peerStatus = $("#peer_status")
 
     peerStatus.parent().removeClassBy("bg-").addClass("fg-white")
