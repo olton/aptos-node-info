@@ -32,7 +32,7 @@ export const getHostMetrics = async ({host = "", port, prot = "http"}) => {
 export const getHostApiData = async ({ver = 'none', path = LEDGER_ENDPOINT, json = true, host = "", port, prot = "http"}) => {
     const link = `${prot.toLowerCase()}://${host}${port && ![443, 80].includes(port) ? ':'+port:''}${path}${ver === 'none' ? '' : ver === 'v1' ? 'v1' : 'v0'}`
     let result
-    console.log(link)
+    // console.log(link)
     const controller = new AbortController()
     const timeout = setTimeout(() => {
         controller.abort()

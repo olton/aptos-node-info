@@ -148,6 +148,22 @@ globalThis.updateMetricData = (d) => {
         $("#validator-state").hide()
     }
 
+    if (metric.is_validator) {
+        $("#round_block").closest(".panel").show()
+        $("#connections_block").closest(".panel").hide()
+    } else {
+        $("#round_block").closest(".panel").hide()
+        $("#connections_block").closest(".panel").show()
+    }
+
+    if (metric.is_validator) {
+        $("#commited_block").closest(".panel").show()
+        $("#requests_block").closest(".panel").hide()
+    } else {
+        $("#commited_block").closest(".panel").hide()
+        $("#requests_block").closest(".panel").show()
+    }
+
     const peerStatus = $("#peer_status")
 
     peerStatus.parent().removeClassBy("bg-").addClass("fg-white")

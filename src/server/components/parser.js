@@ -7,6 +7,56 @@ export const parseMetrics = data => {
 
         let val = l.split(" ")[1]
 
+        // Begin Validator Metrics
+        if (l.includes("aptos_consensus_current_round")) {
+            counters.is_validator = true
+            counters.consensus_current_round = val
+        }
+        if (l.includes("aptos_consensus_epoch")) {
+            counters.consensus_epoch = val
+        }
+        if (l.includes("aptos_consensus_last_committed_round")) {
+            counters.consensus_last_commited_round = val
+        }
+        if (l.includes("aptos_consensus_last_committed_version")) {
+            counters.consensus_last_commited_version = val
+        }
+        if (l.includes("aptos_consensus_error_count")) {
+            counters.consensus_error_count = val
+        }
+        if (l.includes("aptos_consensus_current_epoch_validators")) {
+            counters.consensus_current_epoch_validators = val
+        }
+
+        if (l.includes("aptos_committed_proposals_in_window")) {
+            counters.committed_proposals = val
+        }
+        if (l.includes("aptos_committed_votes_in_window")) {
+            counters.committed_votes = val
+        }
+        if (l.includes("aptos_consensus_committed_blocks_count")) {
+            counters.committed_blocks_count = val
+        }
+        if (l.includes("aptos_consensus_num_blocks_in_tree")) {
+            counters.consensus_num_blocks_in_tree = val
+        }
+        if (l.includes("aptos_consensus_committed_txns_count")) {
+            if (l.includes("retry")) counters.consensus_committed_txns_retry = val
+            if (l.includes("success")) counters.consensus_committed_txns_success = val
+        }
+
+        if (l.includes("aptos_consensus_buffer_manager_msgs_count")) {
+            if (l.includes("dequeued")) counters.consensus_buffer_dequeued = val
+            if (l.includes("enqueued")) counters.consensus_buffer_enqueued = val
+        }
+        if (l.includes("aptos_consensus_channel_msgs_count")) {
+            if (l.includes("dequeued")) counters.consensus_channel_dequeued = val
+            if (l.includes("enqueued")) counters.consensus_channel_enqueued = val
+            if (l.includes("dropped")) counters.consensus_channel_dropped = val
+        }
+
+        // End of Validator metrics
+
         if (l.includes("aptos_data_client_connected_peers")) {
             if (l.includes("prioritized_peer")) counters.connected_peers_priortized = val
             if (l.includes("regular_peer")) counters.connected_peers_regular = val
@@ -27,41 +77,6 @@ export const parseMetrics = data => {
             if (l.includes("HealthCheckerRpc")) counters.network_app_outbound_traffic_count_HealthCheckerRpc = val
             if (l.includes("StorageServiceRpc")) counters.network_app_outbound_traffic_count_StorageServiceRpc = val
         }
-
-        if (l.includes("aptos_consensus_current_round")) {
-            counters.is_validator = true
-            counters.consensus_current_round = val
-        }
-
-        if (l.includes("aptos_consensus_last_committed_round")) {
-            counters.consensus_last_committed_round = val
-        }
-
-        if (l.includes("aptos_consensus_current_epoch_validators")) {
-            counters.consensus_current_epoch_validators = val
-        }
-
-        if (l.includes("aptos_consensus_epoch")) {
-            counters.consensus_epoch = val
-        }
-
-        if (l.includes("aptos_consensus_last_committed_version")) {
-            counters.consensus_last_committed_version = val
-        }
-
-        if (l.includes("aptos_consensus_num_blocks_in_tree")) {
-            counters.consensus_num_blocks_in_tree = val
-        }
-
-        if (l.includes("aptos_consensus_proposals_count")) {
-            counters.consensus_proposals_count = val
-        }
-
-        if (l.includes("aptos_consensus_qc_rounds_count")) {
-            counters.consensus_qc_rounds_count = val
-        }
-
-        // counters.node_sync_state = -1
 
         // +
         if (l.includes("aptos_state_sync_version")) {

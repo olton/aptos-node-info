@@ -161,4 +161,7 @@ const changeColors = () => {
     }
 
     currentTime()
+
+    $("#round_block").closest(".panel").hide()
+    $("#commited_block").closest(".panel").hide()
 })
