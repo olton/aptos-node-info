@@ -23,9 +23,6 @@ globalThis.enterAddress = (form) => {
     $("#chain-ok").removeClassBy("fg-")
     $("#network-icon").removeClassBy("fg-")
 
-    $("#memory-usage-chart").clear()
-    globalThis.memoryChart = null
-
     let address = form.elements["node_address"].value.trim()
     let api = (form.elements["api_port"].value.trim())
     let metric = (form.elements["metric_port"].value.trim())
@@ -93,7 +90,7 @@ const changeColors = () => {
         seed: 'HTTP'
     }
 
-    globalThis.apiVersion = 'none'
+    globalThis.apiVersion = 'v1'
 
     $(".port-protocol-switcher").on("click", function() {
         const $el = $(this)
@@ -165,4 +162,5 @@ const changeColors = () => {
     $("#round_block").closest(".panel").hide()
     $("#commited_block").closest(".panel").hide()
     $("#buffer_block").closest(".panel").hide()
+    $("#graph_quorum_store_block").closest(".panel").hide()
 })
