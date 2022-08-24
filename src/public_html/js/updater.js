@@ -14,7 +14,7 @@ globalThis.updateLedgerData = (data) => {
     const syncStatus = $("#sync_status")
 
     const in_chain = !error && +(data.ledger.chain_id) === +(data.ledger.aptos_chain_id)
-    const synced = !error && Math.abs(+(data.ledger.ledger_version) - +(data.ledger.aptos_version)) <= (config.aptos.accuracy || 100)
+    const synced = !error && Math.abs(+(data.ledger.ledger_version) - +(data.ledger.aptos_version)) <= (serverConfig.aptos.accuracy || 100)
 
     if (!error) {
         globalThis.ledgerVersion = ledger.ledger_version
